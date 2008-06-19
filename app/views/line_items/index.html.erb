@@ -1,0 +1,76 @@
+<table width="100%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td><h1><%= @client.name %> &raquo; Billing Details</h1></td>
+		<td align="right">
+			<%= link_to 'New Line Item', new_client_line_item_path %> |
+			<%= link_to 'Create Invoice', new_client_invoice_path %> |
+			<%= link_to 'Import from CSV', import_client_line_items_path %>
+		</td>
+	</tr>
+</table>
+
+<% form_tag new_client_invoice_path(@client), :id => 'line_items_form' do %>
+	<%= hidden_field_tag :invoice_id, nil %>
+	<table border="1" cellpadding="4" cellspacing="0">
+		<tr>
+			<td style="padding: 2px; font-size: 11px; text-align: center">
+				<a href="javascript:;" onclick="select_all(true)">all</a><br>
+				<a href="javascript:;" onclick="select_all(false)">none</a><br>
+			</td>
+		  <th>Date</th>
+		  <th>User</th>
+		  <th>Start</th>
+		  <th>Finish</th>
+		  <th>Hours</th>
+		  <th>Rate</th>
+		  <th>Total</th>
+		  <th>Notes</th>
+		</tr>
+
+	<% for invoice in @invoices  %>
+		<tbody style="background-color: <%= cycle 'white', '#CCCCCC' %>">
+			<% if invoice.new_record? %>
+				<tr>
+					<td colspan="7"><%= link_to 'Create New', 'javascript:;', :onclick => "$('line_items_form').action = '#{new_client_invoice_path(@client)}'; $('line_items_form').method='get'; $('line_items_form').submit()" %></td>
+					<td align="right"><b><%=number_to_currency @client.balance %></b></td>
+					<td><b>Current Balance</b></td>
+				</tr>				
+			<% else %>
+				<tr>
+					<td><%= link_to 'Assign', 'javascript:;', :onclick => "$('line_items_form').action = '#{assign_client_invoice_path(@client, invoice)}'; $('line_items_form').submit()" %></td>
+					<td colspan="6"><%= invoice.date.to_s(:slash) %></td>
+					<td align="right"><b><%=number_to_currency invoice.total %></b></td>
+					<td><b>PAID</b></td>
+					<td colspan="2">
+						<%= link_to 'Export PDF', client_invoice_path(@client, invoice) %>
+					</td>
+				</tr>
+			<% end %>
+			<% for line_item in invoice.line_items.sort{|x,y| x.date <=> y.date}.reverse %>
+				<tr>
+					<td><%= check_box_tag 'line_items[]', line_item.id, line_item.invoice_id.nil? %></td>
+					<td><%= line_item.date.to_s(:slash) %></td>
+					<td><%=h line_item.user.login %></td>
+					<td><%= line_item.start.to_s(:time) %></td>
+					<td><%= line_item.finish.to_s(:time) %></td>
+					<td><%= line_item.hours %>
+					<td align="right"><%=number_to_currency(line_item.rate, :precision => 0) %></td>
+					<td align="right"><%=number_to_currency line_item.total %></td>
+					<td><%=h line_item.notes %></td>
+					<td><%= link_to 'Edit', edit_client_line_item_path(@client, line_item) %></td>
+					<td><%= link_to 'Destroy', [@client, line_item], :confirm => 'Are you sure?', :method => :delete %></td>
+				</tr>
+			<% end %>
+		</tbody>
+	<% end %>
+
+	</table>
+	
+	<% javascript_tag do %>
+		function select_all(flag) {
+			$$('input[type=checkbox]').each(function(checkbox) {
+				checkbox.checked = flag
+			})
+		}
+	<% end %>
+<% end %>

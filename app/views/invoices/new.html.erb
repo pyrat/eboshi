@@ -1,0 +1,32 @@
+<h1>New invoice</h1>
+
+<%= error_messages_for :invoice %>
+
+<% form_for(@invoice, :url => [@client, @invoice]) do |f| %>
+	<table>
+		<% for line_item in @line_items  %>
+		<tr>
+			<td><%= check_box_tag 'line_items[]', line_item.id, true %></td>
+			<td><%= line_item.date.to_s(:slash) %></td>
+			<td><%=h line_item.user.login %></td>
+			<td><%= line_item.start.to_s(:time) %></td>
+			<td><%= line_item.finish.to_s(:time) %></td>
+			<td><%= line_item.hours %>
+			<td><%=number_to_currency(line_item.rate, :precision => 0) %></td>
+			<td><%=number_to_currency line_item.total %></td>
+			<td><%=h line_item.notes %></td>
+		</tr>
+		<% end %>
+	</table>
+	
+  <p>
+    <b>Total</b><br />
+    <%= f.text_field :total %>
+  </p>
+
+  <p>
+    <%= f.submit "Create" %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', client_invoices_path(@client) %>

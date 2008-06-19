@@ -1,0 +1,22 @@
+<h1>Editing invoice</h1>
+
+<%= error_messages_for :invoice %>
+
+<% form_for(@invoice) do |f| %>
+  <p>
+    <b>Client</b><br />
+    <%= f.text_field :client_id %>
+  </p>
+
+  <p>
+    <b>Total</b><br />
+    <%= f.text_field :total %>
+  </p>
+
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @invoice %> |
+<%= link_to 'Back', invoices_path %>
