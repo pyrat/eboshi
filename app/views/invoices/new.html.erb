@@ -18,7 +18,22 @@
 		</tr>
 		<% end %>
 	</table>
+
+	<p>
+		<b>Date</b><br>
+		<%= f.date_select :date %>
+	</p>
 	
+	<p>
+		<b>Paid</b><br>
+		<%= f.date_select :paid %>
+	</p>
+	
+  <p>
+    <b>Project</b><br />
+    <%= f.text_field :project_name %>
+  </p>
+  	
   <p>
     <b>Total</b><br />
     <%= f.text_field :total %>

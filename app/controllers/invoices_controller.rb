@@ -23,7 +23,7 @@ class InvoicesController < ApplicationController
 
   # GET /invoices/new
   def new
-    @invoice = @client.invoices.new
+    @invoice = @client.invoices.new(:date => Date.today, :paid => Date.today)
     @line_items = @client.line_items.find(:all, :conditions => ["id IN (?)", params[:line_items]])
     @invoice.total = @line_items.sum { |li| li.total }
   end
