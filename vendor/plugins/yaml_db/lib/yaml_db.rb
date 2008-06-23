@@ -161,6 +161,7 @@ module YamlDb::Load
 	end
 
 	def self.reset_pk_sequence!(table_name)
+		return
 		if ActiveRecord::Base.connection.kind_of?(ActiveRecord::ConnectionAdapters::PostgreSQLAdapter)
 			ActiveRecord::Base.connection.reset_pk_sequence!(table_name)
 		end
