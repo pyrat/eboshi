@@ -11,7 +11,8 @@ class LineItemsController < ApplicationController
     invoice = Invoice.new
     invoice.line_items = @client.line_items.find(:all, :conditions => "invoice_id IS NULL", :order => 'date DESC')
     @invoices.unshift invoice
-
+		@clock_in = LineItem.new(:user => current_user, :start => Time.now, :finish => Time.now, :rate => current_user.rate)
+		@clock_out = LineItem.find(:first)
   end
 
   # GET /line_items/1
@@ -36,7 +37,7 @@ class LineItemsController < ApplicationController
 
     if @line_item.save
       flash[:notice] = 'LineItem was successfully created.'
-      redirect_to(@client, @line_item)
+      redirect_to client_line_items_path(@client)
     else
       render :action => "new"
     end
@@ -45,7 +46,6 @@ class LineItemsController < ApplicationController
   # PUT /line_items/1
   def update
     @line_item = LineItem.find(params[:id])
-
     if @line_item.update_attributes(params[:line_item])
       flash[:notice] = 'LineItem was successfully updated.'
       redirect_to client_line_items_path(@client) 

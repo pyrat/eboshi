@@ -5,9 +5,14 @@
 <% form_for(@user) do |f| %>
   <p>
     <b>Name</b><br />
-    <%= f.text_field :name %>
+    <%= f.text_field :login %>
   </p>
 
+  <p>
+    <b>Default Rate/Hour</b><br />
+    $<%= f.text_field :rate %>
+  </p>
+  
   <p>
     <%= f.submit "Update" %>
   </p>
