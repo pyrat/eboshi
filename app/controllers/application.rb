@@ -8,4 +8,14 @@ class ApplicationController < ActionController::Base
   # See ActionController::RequestForgeryProtection for details
   # Uncomment the :secret if you're not using the cookie session store
   protect_from_forgery # :secret => '777e12608199867e6528eb1a3556d20d'
+  
+  before_filter :authenticate
+  
+  protected
+
+		def authenticate
+			authenticate_or_request_with_http_basic('Bot and Rose Invoice Application') do |username, password|
+				current_user = User.authenticate(username, password)
+			end
+		end
 end
