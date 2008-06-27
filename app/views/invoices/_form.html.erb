@@ -1,0 +1,35 @@
+	<table>
+		<% for line_item in @line_items  %>
+		<tr>
+			<td><%= check_box_tag 'line_items[]', line_item.id, true %></td>
+			<td><%= line_item.date.to_s(:slash) %></td>
+			<td><%=h line_item.user.login %></td>
+			<td><%= line_item.start.to_s(:time) %></td>
+			<td><%= line_item.finish.to_s(:time) %></td>
+			<td><%= line_item.hours %>
+			<td><%=number_to_currency(line_item.rate, :precision => 0) %></td>
+			<td><%=number_to_currency line_item.total %></td>
+			<td><%=h line_item.notes %></td>
+		</tr>
+		<% end %>
+	</table>
+
+	<p>
+		<b>Date</b><br>
+		<%= form.date_select :date %>
+	</p>
+	
+	<p>
+		<b>Paid</b><br>
+		<%= form.date_select :paid %>
+	</p>
+	
+  <p>
+    <b>Project</b><br />
+    <%= form.text_field :project_name %>
+  </p>
+  	
+  <p>
+    <b>Total</b><br />
+    <%= form.text_field :total %>
+  </p>

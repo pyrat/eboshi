@@ -2,21 +2,14 @@
 
 <%= error_messages_for :invoice %>
 
-<% form_for(@invoice) do |f| %>
-  <p>
-    <b>Client</b><br />
-    <%= f.text_field :client_id %>
-  </p>
+<% form_for(@invoice, :url => [@client, @invoice]) do |f| %>
 
-  <p>
-    <b>Total</b><br />
-    <%= f.text_field :total %>
-  </p>
+	<%= render :partial => 'form', :object => f %>
 
   <p>
     <%= f.submit "Update" %>
   </p>
 <% end %>
 
-<%= link_to 'Show', @invoice %> |
-<%= link_to 'Back', invoices_path %>
+<%= link_to 'Show', [@client, @invoice] %> |
+<%= link_to 'Back', client_invoices_path %>

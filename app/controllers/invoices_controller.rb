@@ -54,7 +54,7 @@ class InvoicesController < ApplicationController
 
     if @invoice.update_attributes(params[:invoice])
       flash[:notice] = 'Invoice was successfully updated.'
-      redirect_to(@invoice) 
+      redirect_to [@client, @invoice]
     else
       render :action => "edit" 
     end

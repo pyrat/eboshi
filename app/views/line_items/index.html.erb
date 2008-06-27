@@ -55,11 +55,12 @@
 			<% else %>
 				<tr>
 					<td><%= link_to 'Assign', 'javascript:;', :onclick => "$('line_items_form').action = '#{assign_client_invoice_path(@client, invoice)}'; $('line_items_form').submit()" %></td>
-					<td colspan="6"><%= invoice.date.to_s(:slash) %></td>
+					<td colspan="6"><%= invoice.date.to_s(:slash) if invoice.date %></td>
 					<td align="right"><b><%=number_to_currency invoice.total %></b></td>
 					<td><b>PAID</b></td>
 					<td colspan="2">
 						<%= link_to 'Export PDF', client_invoice_path(@client, invoice) %>
+						<%= link_to 'Edit', edit_client_invoice_path(@client, invoice) %>
 					</td>
 				</tr>
 			<% end %>
