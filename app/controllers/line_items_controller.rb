@@ -9,7 +9,7 @@ class LineItemsController < ApplicationController
   def index
     @invoices = @client.invoices.find(:all, :order => 'date DESC')
     invoice = Invoice.new
-    invoice.line_items = @client.line_items.find(:all, :conditions => "invoice_id IS NULL", :order => 'date DESC')
+    invoice.line_items = @client.line_items.find(:all, :conditions => "invoice_id IS NULL AND start IS NOT NULL", :order => 'start DESC')
     @invoices.unshift invoice
 		@clock_in = LineItem.new(:user => current_user, :start => Time.now, :finish => Time.now, :rate => current_user.rate)
 		@clock_out = LineItem.find(:first)

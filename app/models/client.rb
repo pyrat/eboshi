@@ -13,4 +13,8 @@ class Client < ActiveRecord::Base
 	def debits
 		invoices.to_a.sum(&:total)
 	end
+	
+	def todo
+		line_items.find :all, :conditions => 'start IS NULL', :order => 'created_at DESC'
+	end
 end

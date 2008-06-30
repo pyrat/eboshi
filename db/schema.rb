@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20080623074837) do
+ActiveRecord::Schema.define(:version => 20080628031010) do
 
   create_table "clients", :force => true do |t|
     t.string   "name"
@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(:version => 20080623074837) do
     t.datetime "finish"
     t.integer  "rate",       :limit => 11
     t.text     "notes"
-    t.datetime "date"
+    t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "invoice_id", :limit => 11
   end

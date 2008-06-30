@@ -3,9 +3,10 @@ class LineItem < ActiveRecord::Base
 	belongs_to :user
 	belongs_to :invoice
 
-	validates_presence_of :user_id, :client_id, :start, :finish, :rate
+	validates_presence_of :user_id, :client_id, :rate
 	
 	def hours
+		return 0 unless finish and start
 		(finish - start) / 60 / 60
 	end
 	

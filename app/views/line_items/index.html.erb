@@ -47,6 +47,14 @@
 					<td align="right"><b><%=number_to_currency @client.balance %></b></td>
 					<td><b>Current Balance</b></td>
 				</tr>
+				<% @client.todo.each do |l| %>
+					<tr>
+						<td>&nbsp;</td>
+						<td>TODO</td>
+						<td colspan="6"><%= link_to 'Clock In', '' %></td>
+						<td><%= l.notes %></td>
+					</tr>
+				<% end %>
 				<tr>
 					<td colspan="9">
 						<%= link_to 'Clock In', "javascript:;", :onclick => "$('new_line_item').submit()" %>
@@ -64,15 +72,15 @@
 					</td>
 				</tr>
 			<% end %>
-			<% for line_item in invoice.line_items.sort{|x,y| x.date <=> y.date}.reverse %>
+			<% for line_item in invoice.line_items.sort{|x,y| x.start <=> y.start}.reverse %>
 				<tr>
 					<td><%= check_box_tag 'line_items[]', line_item.id, line_item.invoice_id.nil? %></td>
-					<td><%= line_item.date.to_s(:slash) %></td>
+					<td><%= line_item.start.to_s(:slash) %></td>
 					<td><%=h line_item.user.login %></td>
 					<td><%= line_item.start.to_s(:time) %></td>
 					<% if line_item.start == line_item.finish %>
 						<td colspan="4"><%= link_to 'Clock Out', "javascript:clock_out(#{line_item.id})" %></td>
-						<td><%= text_field_tag 'notes', '', :size => 50 %>
+						<td><%= text_field_tag 'notes', line_item.notes, :size => 50 %>
 					<% else %>
 						<td><%= line_item.finish.to_s(:time) %></td>
 						<td><%= number_with_precision(line_item.hours, 2) %>

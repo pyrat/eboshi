@@ -14,4 +14,6 @@ Rails::Initializer.run do |config|
     :secret      => 'dd8fca77ce51ddb3d42d1525ee8ebf6e084515596b0162a5db8b690c077641bb527be951d8945506fd9bacf300f886744857b26b4bb6c7c64fc0242e82594d9b'
   }
 
+  config.time_zone = "Pacific Time (US & Canada)"
+
 end
