@@ -33,7 +33,6 @@ class LineItemsController < ApplicationController
   # POST /line_items
   def create
     @line_item = @client.line_items.new(params[:line_item])
-    @line_item.date = @line_item.start
 
     if @line_item.save
       flash[:notice] = 'LineItem was successfully created.'
