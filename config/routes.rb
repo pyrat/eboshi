@@ -5,6 +5,10 @@ ActionController::Routing::Routes.draw do |map|
 	  client.resources :line_items, :collection => [:import, :doimport]
 	  client.resources :invoices, :member => [:assign]
 	end
+	
+	map.create_todo '/clients/:client_id/create_todo', :controller => 'line_items', :action => 'create_todo'
+	map.clock_in '/clients/:client_id/clock_in', :controller => 'line_items', :action => 'clock_in'
+	map.clock_out '/clients/:client_id/line_item/:id/clock_out', :controller => 'line_items', :action => 'clock_out'
   
   map.resources :users
   map.resource :session

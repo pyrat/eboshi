@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20080628031010) do
+ActiveRecord::Schema.define(:version => 20080713172727) do
 
   create_table "clients", :force => true do |t|
     t.string   "name"
@@ -27,7 +27,6 @@ ActiveRecord::Schema.define(:version => 20080628031010) do
 
   create_table "invoices", :force => true do |t|
     t.integer  "client_id",    :limit => 11
-    t.integer  "total",        :limit => 11
     t.datetime "date"
     t.datetime "paid"
     t.string   "project_name"
@@ -43,6 +42,7 @@ ActiveRecord::Schema.define(:version => 20080628031010) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "invoice_id", :limit => 11
+    t.string   "type"
   end
 
   create_table "users", :force => true do |t|

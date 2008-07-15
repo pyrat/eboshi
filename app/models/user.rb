@@ -20,6 +20,10 @@ class User < ActiveRecord::Base
   def name
   	login
   end
+  
+  def name=(name)
+  	login=name
+  end
 
   # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
   def self.authenticate(login, password)

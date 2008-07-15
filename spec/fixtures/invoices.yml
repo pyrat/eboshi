@@ -1,0 +1,5 @@
+invoice:
+  date: 2008-01-01
+  paid: 2008-02-01
+  project_name: NANETS website
+  client: NANETS

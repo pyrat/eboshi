@@ -1,0 +1,6 @@
+--colour
+--loadby mtime
+--format progress
+--reverse
+--format html:doc/spec/report.html
+

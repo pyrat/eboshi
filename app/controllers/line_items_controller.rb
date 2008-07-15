@@ -11,8 +11,6 @@ class LineItemsController < ApplicationController
     invoice = Invoice.new
     invoice.line_items = @client.line_items.find(:all, :conditions => "invoice_id IS NULL AND start IS NOT NULL", :order => 'start DESC')
     @invoices.unshift invoice
-		@clock_in = LineItem.new(:user => current_user, :start => Time.now, :finish => Time.now, :rate => current_user.rate)
-		@clock_out = LineItem.find(:first)
   end
 
   # GET /line_items/1
@@ -33,13 +31,13 @@ class LineItemsController < ApplicationController
   # POST /line_items
   def create
     @line_item = @client.line_items.new(params[:line_item])
-
-    if @line_item.save
-      flash[:notice] = 'LineItem was successfully created.'
-      redirect_to client_line_items_path(@client)
-    else
-      render :action => "new"
-    end
+		
+		if @line_item.save
+		  flash[:notice] = 'LineItem was successfully created.'
+		  redirect_to client_line_items_path(@client)
+		else
+		  render :action => "new"
+		end
   end
 
   # PUT /line_items/1
@@ -58,8 +56,42 @@ class LineItemsController < ApplicationController
     @line_item = LineItem.find(params[:id])
     @line_item.destroy
 
-    redirect_to(client_line_items_url) 
+		respond_to do |format|
+			format.html { redirect_to client_line_items_path(@client) }
+			format.js do
+				render :update do |page|
+					page.remove "line_item_#{@line_item.id}"
+				end
+			end
+		end
   end
+  
+  def clock_in
+  	@line_item = @client.clock_in(current_user)
+  	
+  	render :update do |page|
+  		page.insert_html :after, 'new_line_items', :partial => 'line_item'
+  	end
+  end
+  
+  def clock_out
+  	@line_item = LineItem.find(params[:id])
+  	@line_item.clock_out(params[:notes])
+  	
+  	render :update do |page|
+  		page.replace "line_item_#{@line_item.id}", :partial => 'line_item'
+  	end
+  end
+  
+  def create_todo
+    @line_item = LineItem::ToDo.new(params[:line_item])
+    @client.line_items << @line_item
+		
+		render :update do |page|
+			page.insert_html :after, 'new_todos', :partial => 'line_item'
+		end
+  end
+
   
   def import
   end

@@ -1,78 +1,69 @@
 class InvoicesController < ApplicationController
 	before_filter :get_client
+	before_filter :get_invoice, :except => [:index, :new, :create]
 	
-	def get_client
-		@client = Client.find(params[:client_id])
-	end
-	
-  # GET /invoices
-  def index
-    @invoices = @client.invoices.find(:all)
-  end
+	protected 
+		def get_client
+			@client = Client.find params[:client_id]
+		end
 
-  # GET /invoices/1
-  def show
-    @invoice = Invoice.find(params[:id])
-		respond_to do |format|
-			format.html 
-			format.pdf do
-				send_data InvoiceDrawer.new.draw(@invoice), :filename => 'invoice.pdf', :type => 'application/pdf', :disposition => 'inline'
-			end
-    end
-  end
+		def get_invoice
+		  @invoice = Invoice.find params[:id]
+		end
 
-  # GET /invoices/new
-  def new
-    @invoice = @client.invoices.new(:date => Date.today, :paid => Date.today)
-    @line_items = @client.line_items.find(:all, :conditions => ["id IN (?)", params[:line_items]])
-    @invoice.total = @line_items.sum { |li| li.total }
-  end
+	public
+		def index
+		  @invoices = @client.invoices
+		end
 
-  # GET /invoices/1/edit
-  def edit
-    @invoice = Invoice.find(params[:id])
-  end
+		def show
+			respond_to do |format|
+				format.html 
+				format.pdf do
+					send_data InvoiceDrawer.new.draw(@invoice), :filename => 'invoice.pdf', :type => 'application/pdf', :disposition => 'inline'
+				end
+		  end
+		end
 
-  # POST /invoices
-  def create
-    @invoice = @client.invoices.new(params[:invoice])
-    for line_item in params[:line_items]
-    	@invoice.line_items << LineItem.find(line_item)
-    end
+		def new
+		  @invoice = @client.invoices.new
+		  @line_items = @client.line_items.find(:all, :conditions => ["id IN (?)", params[:line_items]]) if params[:line_items]
+		end
 
-    if @invoice.save
-      flash[:notice] = 'Invoice was successfully created.'
-      redirect_to [@client, @invoice]
-    else
-      render :action => "new"
-    end
-  end
+		def edit
+		end
 
-  # PUT /invoices/1
-  def update
-    @invoice = Invoice.find(params[:id])
+		def create
+		  @invoice = @client.invoices.new params[:invoice]
 
-    if @invoice.update_attributes(params[:invoice])
-      flash[:notice] = 'Invoice was successfully updated.'
-      redirect_to [@client, @invoice]
-    else
-      render :action => "edit" 
-    end
-  end
+		  if @invoice.save
+		    flash[:notice] = 'Invoice was successfully created.'
+		    redirect_to client_invoice_path(@client, @invoice)
+		  else
+		    render :action => "new"
+		  end
+		end
 
-  # DELETE /invoices/1
-  def destroy
-    @invoice = Invoice.find(params[:id])
-    @invoice.destroy
+		def update
+		  if @invoice.update_attributes params[:invoice]
+		    flash[:notice] = 'Invoice was successfully updated.'
+		    redirect_to client_invoice_path(@client, @invoice)
+		  else
+		    render :action => "edit" 
+		  end
+		end
 
-    redirect_to(invoices_url) 
-  end
-  
-  def assign
-  	@invoice = Invoice.find(params[:id])
-  	@invoice.line_item_ids = params[:line_items]
-  	@invoice.save
-  	
-    redirect_to(client_line_items_path(@client))  	
-  end
+		def destroy
+		  @invoice.destroy
+		  flash[:notice] = 'Invoice was successfully deleted.'
+
+		  redirect_to client_line_items_path(@client)
+		end
+		
+		def assign
+			@invoice.line_item_ids = params[:line_items]
+			@invoice.save
+			
+		  redirect_to client_line_items_path(@client)
+		end
 end

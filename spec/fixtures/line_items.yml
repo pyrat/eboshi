@@ -1,0 +1,63 @@
+billed1:
+  client: NANETS
+  invoice: invoice
+  user: Micah
+  start: '2000-12-31 01:00:00'
+  finish: '2000-12-31 02:00:00'
+  type: Work
+  rate: 50
+  notes: billed 1
+  
+billed2:
+  client: NANETS
+  invoice: invoice
+  user: Micah
+  start: '2000-12-31 03:00:00'
+  finish: '2000-12-31 04:00:00'
+  type: Work
+  rate: 50
+  notes: billed 2
+  
+adjustment1:
+  client: NANETS
+  invoice: invoice
+  user: Micah
+  type: Adjustment
+  rate: -25
+  notes: adjustment 1
+
+adjustment2:
+  client: NANETS
+  invoice: invoice
+  user: Micah
+  type: Adjustment
+  rate: -25
+  notes: adjustment 2
+
+unbilled1:
+  client: NANETS
+  user: Micah
+  start: '2000-12-31 04:00:00'
+  finish: '2000-12-31 05:00:00'
+  type: Work
+  rate: 50
+  notes: unbilled 1
+  
+unbilled2:
+  client: NANETS
+  user: Micah
+  start: '2000-12-31 05:00:00'
+  finish: '2000-12-31 06:00:00'
+  type: Work
+  rate: 50
+  notes: unbilled 2
+  
+todo1:
+  client: NANETS
+  type: ToDo
+  notes: todo 1
+	
+todo2:
+  client: NANETS
+  type: ToDo
+  notes: todo 2
