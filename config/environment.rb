@@ -8,6 +8,9 @@ require File.join(File.dirname(__FILE__), 'boot')
 
 Rails::Initializer.run do |config|
   config.gem 'pdf-writer', :lib => 'pdf/writer'
+  #config.gem 'ZenTest', :version => '>= 3.10.0'
+  #config.gem 'rspec', :version => '>= 1.1.4'
+  config.gem 'rcov', :version => '>= 0.8.1.2.0'
 
   config.action_controller.session = {
     :session_key => '_invoice_session',
