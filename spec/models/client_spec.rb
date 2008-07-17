@@ -3,6 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 describe Client do
   before(:each) do
   	@client = clients(:NANETS)
+  	@user = users(:Micah)
   end
 
   it "should create a new instance given valid attributes" do
@@ -24,5 +25,15 @@ describe Client do
 	it "should provide a todo list" do
 		@client.todo.length.should == 2
 	end
-  # balance credits debits todo
+	
+	it "should calculate a default rate given a user" do
+		@client.default_rate(@user).should == 50
+		Client.new.default_rate(@user).should == 65
+	end
+	
+	it "should return a incomplete work item on clock_in" do
+		li = @client.clock_in(@user)
+		li.class.should == Work
+		li.incomplete?.should == true
+	end
 end

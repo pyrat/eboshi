@@ -11,7 +11,7 @@
 		<% if line_item.incomplete? %>
 			<td colspan="2"><%= link_to_remote 'Clock Out', :url => clock_out_path(@client, line_item), :with => "'notes='+escape($('notes_#{line_item.id}').value)+'&rate='+escape($('rate_#{line_item.id}').value)" %></td>
  			<td colspan="2">
- 				<%= text_field_tag "rate_#{line_item.id}", @client.default_rate(current_user), :style => "width: 60px" %>
+ 				<%= text_field_tag "rate_#{line_item.id}", line_item.rate, :style => "width: 60px" %>
  			</td>
 			<td><%= text_field_tag "notes_#{line_item.id}", line_item.notes, :size => 50 %>
 		<% else %>

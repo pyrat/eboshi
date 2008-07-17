@@ -179,192 +179,226 @@ a {
 <div class="example_group">
   <dl>
   <dt id="example_group_1">InvoicesHelper</dt>
-    <script type="text/javascript">moveProgressBar('1.9');</script>
+    <script type="text/javascript">moveProgressBar('1.5');</script>
     <dd class="spec passed"><span class="passed_spec_name">should be included in the object returned by #helper</span></dd>
   </dl>
 </div>
 <div class="example_group">
   <dl>
   <dt id="example_group_2">InvoicesController route recognition</dt>
-    <script type="text/javascript">moveProgressBar('3.9');</script>
+    <script type="text/javascript">moveProgressBar('3.1');</script>
     <dd class="spec passed"><span class="passed_spec_name">should generate params { :controller =&gt; 'invoices', action =&gt; 'destroy', id =&gt; '2', :client_id =&gt; '1' } from DELETE /clients/1/invoices/2</span></dd>
-    <script type="text/javascript">moveProgressBar('5.8');</script>
+    <script type="text/javascript">moveProgressBar('4.7');</script>
     <dd class="spec passed"><span class="passed_spec_name">should generate params { :controller =&gt; 'invoices', action =&gt; 'update', id =&gt; '2' } from PUT /clients/1/invoices/2</span></dd>
-    <script type="text/javascript">moveProgressBar('7.8');</script>
+    <script type="text/javascript">moveProgressBar('6.3');</script>
     <dd class="spec passed"><span class="passed_spec_name">should generate params { :controller =&gt; 'invoices', action =&gt; 'edit', id =&gt; '2' } from GET /clients/1/invoices/2/edit</span></dd>
-    <script type="text/javascript">moveProgressBar('9.8');</script>
+    <script type="text/javascript">moveProgressBar('7.9');</script>
     <dd class="spec passed"><span class="passed_spec_name">should generate params { :controller =&gt; 'invoices', action =&gt; 'show', id =&gt; '2' } from GET /clients/1/invoices/1</span></dd>
-    <script type="text/javascript">moveProgressBar('11.7');</script>
+    <script type="text/javascript">moveProgressBar('9.5');</script>
     <dd class="spec passed"><span class="passed_spec_name">should generate params { :controller =&gt; 'invoices', action =&gt; 'create' } from POST /clients/1/invoices</span></dd>
-    <script type="text/javascript">moveProgressBar('13.7');</script>
+    <script type="text/javascript">moveProgressBar('11.1');</script>
     <dd class="spec passed"><span class="passed_spec_name">should generate params { :controller =&gt; 'invoices', action =&gt; 'new' } from GET /clients/1/invoices/new</span></dd>
-    <script type="text/javascript">moveProgressBar('15.6');</script>
+    <script type="text/javascript">moveProgressBar('12.6');</script>
     <dd class="spec passed"><span class="passed_spec_name">should generate params { :controller =&gt; 'invoices', action =&gt; 'index' } from GET /clients/1/invoices</span></dd>
   </dl>
 </div>
 <div class="example_group">
   <dl>
   <dt id="example_group_3">InvoicesController route generation</dt>
-    <script type="text/javascript">moveProgressBar('17.6');</script>
+    <script type="text/javascript">moveProgressBar('14.2');</script>
     <dd class="spec passed"><span class="passed_spec_name">should map { :controller =&gt; 'invoices', :action =&gt; 'destroy', :id =&gt; 2, :client_id =&gt; '1' } to /clients/1/invoices/2</span></dd>
-    <script type="text/javascript">moveProgressBar('19.6');</script>
+    <script type="text/javascript">moveProgressBar('15.8');</script>
     <dd class="spec passed"><span class="passed_spec_name">should map { :controller =&gt; 'invoices', :action =&gt; 'update', :id =&gt; 2, :client_id =&gt; '1' } to /clients/1/invoices/2</span></dd>
-    <script type="text/javascript">moveProgressBar('21.5');</script>
+    <script type="text/javascript">moveProgressBar('17.4');</script>
     <dd class="spec passed"><span class="passed_spec_name">should map { :controller =&gt; 'invoices', :action =&gt; 'edit', :id =&gt; 2, :client_id =&gt; '1' } to /clients/1/invoices/2/edit</span></dd>
-    <script type="text/javascript">moveProgressBar('23.5');</script>
+    <script type="text/javascript">moveProgressBar('19.0');</script>
     <dd class="spec passed"><span class="passed_spec_name">should map { :controller =&gt; 'invoices', :action =&gt; 'show', :id =&gt; 2, :client_id =&gt; '1' } to /clients/1/invoices/2</span></dd>
-    <script type="text/javascript">moveProgressBar('25.4');</script>
+    <script type="text/javascript">moveProgressBar('20.6');</script>
     <dd class="spec passed"><span class="passed_spec_name">should map { :controller =&gt; 'invoices', :action =&gt; 'new', :client_id =&gt; '1' } to /clients/1/invoices/new</span></dd>
-    <script type="text/javascript">moveProgressBar('27.4');</script>
+    <script type="text/javascript">moveProgressBar('22.2');</script>
     <dd class="spec passed"><span class="passed_spec_name">should map { :controller =&gt; 'invoices', :action =&gt; 'index', :client_id =&gt; '1' } to /clients/1/invoices</span></dd>
   </dl>
 </div>
 <div class="example_group">
   <dl>
-  <dt id="example_group_4">Invoice</dt>
-    <script type="text/javascript">moveProgressBar('29.4');</script>
-    <dd class="spec passed"><span class="passed_spec_name">should default date and paid to today</span></dd>
-    <script type="text/javascript">moveProgressBar('31.3');</script>
-    <dd class="spec passed"><span class="passed_spec_name">should create a new instance given valid attributes</span></dd>
-  </dl>
-</div>
-<div class="example_group">
-  <dl>
-  <dt id="example_group_5">LineItem adjustment</dt>
-    <script type="text/javascript">moveProgressBar('33.3');</script>
-    <dd class="spec passed"><span class="passed_spec_name">should be greater than all other line items</span></dd>
-    <script type="text/javascript">moveProgressBar('35.2');</script>
-    <dd class="spec passed"><span class="passed_spec_name">should calculate the total correctly</span></dd>
-    <script type="text/javascript">moveProgressBar('37.2');</script>
-    <dd class="spec passed"><span class="passed_spec_name">should calculate the hours correctly</span></dd>
-  </dl>
-</div>
-<div class="example_group">
-  <dl>
-  <dt id="example_group_6">LineItem work</dt>
-    <script type="text/javascript">moveProgressBar('39.2');</script>
-    <dd class="spec passed"><span class="passed_spec_name">should be less than adjustment items</span></dd>
-    <script type="text/javascript">moveProgressBar('41.1');</script>
-    <dd class="spec passed"><span class="passed_spec_name">should be greater than todo items</span></dd>
-    <script type="text/javascript">moveProgressBar('43.1');</script>
-    <dd class="spec passed"><span class="passed_spec_name">should be compared to other line items by start time descending</span></dd>
-    <script type="text/javascript">moveProgressBar('45.0');</script>
-    <dd class="spec passed"><span class="passed_spec_name">should calculate the total correctly</span></dd>
-    <script type="text/javascript">moveProgressBar('47.0');</script>
-    <dd class="spec passed"><span class="passed_spec_name">should calculate the hours correctly</span></dd>
-  </dl>
-</div>
-<div class="example_group">
-  <dl>
-  <dt id="example_group_7">LineItem todo</dt>
-    <script type="text/javascript">moveProgressBar('49.0');</script>
-    <dd class="spec passed"><span class="passed_spec_name">should be less than all other line items</span></dd>
-    <script type="text/javascript">moveProgressBar('50.9');</script>
-    <dd class="spec passed"><span class="passed_spec_name">should calculate the total correctly</span></dd>
-    <script type="text/javascript">moveProgressBar('52.9');</script>
-    <dd class="spec passed"><span class="passed_spec_name">should calculate the hours correctly</span></dd>
-  </dl>
-</div>
-<div class="example_group">
-  <dl>
-  <dt id="example_group_8">Client</dt>
-    <script type="text/javascript">moveProgressBar('54.9');</script>
-    <dd class="spec passed"><span class="passed_spec_name">should provide a todo list</span></dd>
-    <script type="text/javascript">moveProgressBar('56.8');</script>
-    <dd class="spec passed"><span class="passed_spec_name">should calculate the debits correctly</span></dd>
-    <script type="text/javascript">moveProgressBar('58.8');</script>
-    <dd class="spec passed"><span class="passed_spec_name">should calculate the credits correctly</span></dd>
-    <script type="text/javascript">moveProgressBar('60.7');</script>
-    <dd class="spec passed"><span class="passed_spec_name">should calculate the balance correctly</span></dd>
-    <script type="text/javascript">moveProgressBar('62.7');</script>
-    <dd class="spec passed"><span class="passed_spec_name">should create a new instance given valid attributes</span></dd>
-  </dl>
-</div>
-<div class="example_group">
-  <dl>
-  <dt id="example_group_9">InvoicesController responding to DELETE destroy</dt>
-    <script type="text/javascript">moveProgressBar('64.7');</script>
+  <dt id="example_group_4">InvoicesController responding to DELETE destroy</dt>
+    <script type="text/javascript">moveProgressBar('23.8');</script>
     <dd class="spec passed"><span class="passed_spec_name">should redirect to the invoices list</span></dd>
-    <script type="text/javascript">moveProgressBar('66.6');</script>
+    <script type="text/javascript">moveProgressBar('25.3');</script>
     <dd class="spec passed"><span class="passed_spec_name">should destroy the requested invoice</span></dd>
   </dl>
 </div>
 <div class="example_group">
   <dl>
-  <dt id="example_group_10">InvoicesController responding to PUT udpate with invalid params</dt>
-    <script type="text/javascript">moveProgressBar('68.6');</script>
+  <dt id="example_group_5">InvoicesController responding to PUT udpate with invalid params</dt>
+    <script type="text/javascript">moveProgressBar('26.9');</script>
     <dd class="spec passed"><span class="passed_spec_name">should re-render the 'edit' template</span></dd>
-    <script type="text/javascript">moveProgressBar('70.5');</script>
+    <script type="text/javascript">moveProgressBar('28.5');</script>
     <dd class="spec passed"><span class="passed_spec_name">should expose the invoice as @invoice</span></dd>
-    <script type="text/javascript">moveProgressBar('72.5');</script>
+    <script type="text/javascript">moveProgressBar('30.1');</script>
     <dd class="spec passed"><span class="passed_spec_name">should not update the requested invoice</span></dd>
   </dl>
 </div>
 <div class="example_group">
   <dl>
-  <dt id="example_group_11">InvoicesController responding to PUT udpate with valid params</dt>
-    <script type="text/javascript">moveProgressBar('74.5');</script>
+  <dt id="example_group_6">InvoicesController responding to PUT udpate with valid params</dt>
+    <script type="text/javascript">moveProgressBar('31.7');</script>
     <dd class="spec passed"><span class="passed_spec_name">should redirect to the invoice</span></dd>
-    <script type="text/javascript">moveProgressBar('76.4');</script>
+    <script type="text/javascript">moveProgressBar('33.3');</script>
     <dd class="spec passed"><span class="passed_spec_name">should expose the requested invoice as @invoice</span></dd>
-    <script type="text/javascript">moveProgressBar('78.4');</script>
+    <script type="text/javascript">moveProgressBar('34.9');</script>
     <dd class="spec passed"><span class="passed_spec_name">should update the requested invoice</span></dd>
   </dl>
 </div>
 <div class="example_group">
   <dl>
-  <dt id="example_group_12">InvoicesController responding to POST create with invalid params</dt>
-    <script type="text/javascript">moveProgressBar('80.3');</script>
+  <dt id="example_group_7">InvoicesController responding to POST create with invalid params</dt>
+    <script type="text/javascript">moveProgressBar('36.5');</script>
     <dd class="spec passed"><span class="passed_spec_name">should re-render the 'new' template</span></dd>
-    <script type="text/javascript">moveProgressBar('82.3');</script>
+    <script type="text/javascript">moveProgressBar('38.0');</script>
     <dd class="spec passed"><span class="passed_spec_name">should not save the record</span></dd>
-    <script type="text/javascript">moveProgressBar('84.3');</script>
+    <script type="text/javascript">moveProgressBar('39.6');</script>
     <dd class="spec passed"><span class="passed_spec_name">should expose an @invoice</span></dd>
   </dl>
 </div>
 <div class="example_group">
   <dl>
-  <dt id="example_group_13">InvoicesController responding to POST create with valid params</dt>
-    <script type="text/javascript">moveProgressBar('86.2');</script>
+  <dt id="example_group_8">InvoicesController responding to POST create with valid params</dt>
+    <script type="text/javascript">moveProgressBar('41.2');</script>
     <dd class="spec passed"><span class="passed_spec_name">should redirect to the created invoice</span></dd>
-    <script type="text/javascript">moveProgressBar('88.2');</script>
+    <script type="text/javascript">moveProgressBar('42.8');</script>
     <dd class="spec passed"><span class="passed_spec_name">should assign line items from params</span></dd>
-    <script type="text/javascript">moveProgressBar('90.1');</script>
+    <script type="text/javascript">moveProgressBar('44.4');</script>
     <dd class="spec passed"><span class="passed_spec_name">should save the record</span></dd>
-    <script type="text/javascript">moveProgressBar('92.1');</script>
+    <script type="text/javascript">moveProgressBar('46.0');</script>
     <dd class="spec passed"><span class="passed_spec_name">should expose an @invoice</span></dd>
   </dl>
 </div>
 <div class="example_group">
   <dl>
-  <dt id="example_group_14">InvoicesController responding to GET edit</dt>
-    <script type="text/javascript">moveProgressBar('94.1');</script>
+  <dt id="example_group_9">InvoicesController responding to GET edit</dt>
+    <script type="text/javascript">moveProgressBar('47.6');</script>
     <dd class="spec passed"><span class="passed_spec_name">should expose the requested invoice as @invoice</span></dd>
   </dl>
 </div>
 <div class="example_group">
   <dl>
-  <dt id="example_group_15">InvoicesController responding to GET new</dt>
-    <script type="text/javascript">moveProgressBar('96.0');</script>
+  <dt id="example_group_10">InvoicesController responding to GET new</dt>
+    <script type="text/javascript">moveProgressBar('49.2');</script>
     <dd class="spec passed"><span class="passed_spec_name">should expose a new invoice as @invoice</span></dd>
   </dl>
 </div>
 <div class="example_group">
   <dl>
-  <dt id="example_group_16">InvoicesController responding to GET show</dt>
-    <script type="text/javascript">moveProgressBar('98.0');</script>
+  <dt id="example_group_11">InvoicesController responding to GET show</dt>
+    <script type="text/javascript">moveProgressBar('50.7');</script>
     <dd class="spec passed"><span class="passed_spec_name">should expose the requested invoice as @invoice</span></dd>
   </dl>
 </div>
 <div class="example_group">
   <dl>
-  <dt id="example_group_17">InvoicesController responding to GET index</dt>
-    <script type="text/javascript">moveProgressBar('100.0');</script>
+  <dt id="example_group_12">InvoicesController responding to GET index</dt>
+    <script type="text/javascript">moveProgressBar('52.3');</script>
     <dd class="spec passed"><span class="passed_spec_name">should expose all client invoices as @invoices</span></dd>
   </dl>
 </div>
-<script type="text/javascript">document.getElementById('duration').innerHTML = "Finished in <strong>0.882365 seconds</strong>";</script>
-<script type="text/javascript">document.getElementById('totals').innerHTML = "51 examples, 0 failures";</script>
+<div class="example_group">
+  <dl>
+  <dt id="example_group_13">Invoice</dt>
+    <script type="text/javascript">moveProgressBar('53.9');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should not create an adjustment item when a total is assigned that equals the sum of the line items</span></dd>
+    <script type="text/javascript">moveProgressBar('55.5');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should create an adjustment item when a total is assigned that doesnt equal the sum of the line items</span></dd>
+    <script type="text/javascript">moveProgressBar('57.1');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should default date and paid to today</span></dd>
+    <script type="text/javascript">moveProgressBar('58.7');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should create a new instance given valid attributes</span></dd>
+  </dl>
+</div>
+<div class="example_group">
+  <dl>
+  <dt id="example_group_14">Client</dt>
+    <script type="text/javascript">moveProgressBar('60.3');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should return a incomplete work item on clock_in</span></dd>
+    <script type="text/javascript">moveProgressBar('61.9');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should calculate a default rate given a user</span></dd>
+    <script type="text/javascript">moveProgressBar('63.4');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should provide a todo list</span></dd>
+    <script type="text/javascript">moveProgressBar('65.0');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should calculate the debits correctly</span></dd>
+    <script type="text/javascript">moveProgressBar('66.6');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should calculate the credits correctly</span></dd>
+    <script type="text/javascript">moveProgressBar('68.2');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should calculate the balance correctly</span></dd>
+    <script type="text/javascript">moveProgressBar('69.8');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should create a new instance given valid attributes</span></dd>
+  </dl>
+</div>
+<div class="example_group">
+  <dl>
+  <dt id="example_group_15">LineItem adjustment</dt>
+    <script type="text/javascript">moveProgressBar('71.4');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should respond via total</span></dd>
+    <script type="text/javascript">moveProgressBar('73.0');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should not be checked</span></dd>
+    <script type="text/javascript">moveProgressBar('74.6');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should be greater than all other line items</span></dd>
+    <script type="text/javascript">moveProgressBar('76.1');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should calculate the total correctly</span></dd>
+    <script type="text/javascript">moveProgressBar('77.7');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should calculate the hours correctly</span></dd>
+  </dl>
+</div>
+<div class="example_group">
+  <dl>
+  <dt id="example_group_16">LineItem work incomplete</dt>
+    <script type="text/javascript">moveProgressBar('79.3');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should clock out correctly</span></dd>
+    <script type="text/javascript">moveProgressBar('80.9');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should report as incomplete</span></dd>
+  </dl>
+</div>
+<div class="example_group">
+  <dl>
+  <dt id="example_group_17">LineItem work unbilled</dt>
+    <script type="text/javascript">moveProgressBar('82.5');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should be checked</span></dd>
+  </dl>
+</div>
+<div class="example_group">
+  <dl>
+  <dt id="example_group_18">LineItem work billed</dt>
+    <script type="text/javascript">moveProgressBar('84.1');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should report as complete</span></dd>
+    <script type="text/javascript">moveProgressBar('85.7');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should not be checked</span></dd>
+    <script type="text/javascript">moveProgressBar('87.3');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should be less than adjustment items</span></dd>
+    <script type="text/javascript">moveProgressBar('88.8');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should be greater than todo items</span></dd>
+    <script type="text/javascript">moveProgressBar('90.4');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should be compared to other line items by start time descending</span></dd>
+    <script type="text/javascript">moveProgressBar('92.0');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should calculate the total correctly</span></dd>
+    <script type="text/javascript">moveProgressBar('93.6');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should calculate the hours correctly</span></dd>
+  </dl>
+</div>
+<div class="example_group">
+  <dl>
+  <dt id="example_group_19">LineItem todo</dt>
+    <script type="text/javascript">moveProgressBar('95.2');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should not be checked</span></dd>
+    <script type="text/javascript">moveProgressBar('96.8');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should be less than all other line items</span></dd>
+    <script type="text/javascript">moveProgressBar('98.4');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should calculate the hours correctly</span></dd>
+    <script type="text/javascript">moveProgressBar('100.0');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should calculate the total correctly</span></dd>
+  </dl>
+</div>
+<script type="text/javascript">document.getElementById('duration').innerHTML = "Finished in <strong>1.408167 seconds</strong>";</script>
+<script type="text/javascript">document.getElementById('totals').innerHTML = "63 examples, 0 failures";</script>
 </div>
 </div>
 </body>

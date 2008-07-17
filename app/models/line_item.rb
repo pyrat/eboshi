@@ -16,13 +16,6 @@ class LineItem < ActiveRecord::Base
 		(finish - start) / 60 / 60
 	end
 	
-	def user_name=(name)
-		unless name.nil?
-			user = User.find_by_login(name)
-			user_id = user.try(:id)
-		end
-	end
-
 	def == (target)
 		target == id
 	end
@@ -30,76 +23,4 @@ class LineItem < ActiveRecord::Base
 	def checked?
 		invoice_id.nil?
 	end
-
-end
-
-class Todo < LineItem
-	validates_presence_of :notes
-
-	def <=> (target)
-		-1
-	end
-	def < (target)
-		true
-	end
-	def > (target)
-		false
-	end
-	
-	def checked?
-		false
-	end
-
-
-end
-
-class Work < LineItem
-	validates_presence_of :user_id, :rate, :start, :finish
-	
-	def total
-		(hours * rate).round(2)
-	end
-	
-	def clock_out(rate, notes)
-		update_attributes(:finish => Time.now, :notes => notes, :rate => rate)
-	end
-	
-	def <=> target
-		result = (target <=> self.start)
-		target.is_a?(Work) ? result : result*-1
-	end
-	def < (target)
-		result = (target > self.start)
-		target.is_a?(Work) ? !result : result
-	end
-	def > (target)
-		result = (target < self.start)
-		target.is_a?(Work) ? !result : result
-	end
-	def incomplete?
-		start == finish
-	end
-end
-
-class Adjustment < LineItem
-	validates_presence_of :rate
-	
-	def total
-		self.rate
-	end
-	
-	def total=(value)
-		self.rate = value
-	end
-	
-	def <=> (target)
-		1
-	end
-	def < (target)
-		false
-	end
-	def > (target)
-		true
-	end
-
 end

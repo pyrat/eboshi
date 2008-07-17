@@ -84,7 +84,7 @@ class LineItemsController < ApplicationController
   end
   
   def create_todo
-    @line_item = LineItem::Todo.new(params[:line_item])
+    @line_item = Todo.new(params[:line_item])
     @client.line_items << @line_item
 		
 		render :update do |page|

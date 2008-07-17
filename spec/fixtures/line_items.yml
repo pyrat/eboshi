@@ -39,25 +39,42 @@ unbilled1:
   user: Micah
   start: '2000-12-31 04:00:00'
   finish: '2000-12-31 05:00:00'
-  type: Work
   rate: 50
-  notes: unbilled 1
+  type: Work
   
 unbilled2:
   client: NANETS
   user: Micah
   start: '2000-12-31 05:00:00'
   finish: '2000-12-31 06:00:00'
-  type: Work
   rate: 50
-  notes: unbilled 2
+  type: Work
+  
+incomplete1:
+  client: NANETS
+  user: Micah
+  start: '2000-12-31 07:00:00'
+  finish: '2000-12-31 07:00:00'
+  rate: 50
+  type: Work
+  
+incomplete2:
+  client: NANETS
+  user: Micah
+  start: '2000-12-31 08:00:00'
+  finish: '2000-12-31 08:00:00'
+  rate: 50
+  type: Work
   
 todo1:
   client: NANETS
   type: Todo
   notes: todo 1
+  user: Micah
 	
 todo2:
   client: NANETS
   type: Todo
   notes: todo 2
+  user: Micah
+

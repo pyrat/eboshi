@@ -25,17 +25,17 @@ class Client < ActiveRecord::Base
 	
 	def clock_in(user)
 	  now = Time.now
-  	line_item = LineItem::Work.create(
+  	line_item = Work.create(
   		:start => now,
   		:finish => now,
   		:user => user,
-  		:rate => user.rate
+  		:rate => default_rate(user)
   	)
   	line_items << line_item
   	line_item
 	end
 	
 	def default_rate(user)
-		line_items.find(:first, :conditions => ["type='Work' AND start <> finish AND user_id=? AND rate IS NOT NULL", user.id], :order => "start DESC").rate || user.rate
+		line_items.find(:first, :conditions => ["type='Work' AND start <> finish AND user_id=? AND rate IS NOT NULL", user.id], :order => "start DESC").try(:rate) || user.rate
 	end
 end
