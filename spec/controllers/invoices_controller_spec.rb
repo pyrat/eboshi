@@ -34,12 +34,7 @@ describe InvoicesController do
 		
 		  it "should expose a new invoice as @invoice" do
 		    get :new, :client_id => @client
-		    assigns[:invoice].to_yaml.should == @client.invoices.new.to_yaml
-		  end
-		  
-		  it "should expose assigned line items as @line_items" do
-		  	get :new, :client_id => @client, :line_items => LineItem.all.collect(&:id)
-		  	assigns[:line_items].should == LineItem.all
+		    assigns[:invoice].class.should == Invoice
 		  end
 		  
 		end

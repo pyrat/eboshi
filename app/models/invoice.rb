@@ -8,8 +8,9 @@ class Invoice < ActiveRecord::Base
 	validates_presence_of :client, :date, :paid, :project_name
 	
 	def initialize(options = {})
+		options = {} if options.nil?
 		options.reverse_merge!(:date => Date.today, :paid => Date.today)
-		super options
+		super
 	end
 
 	def total
