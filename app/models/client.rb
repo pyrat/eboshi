@@ -1,5 +1,8 @@
 class Client < ActiveRecord::Base
 	has_many :line_items
+	has_many :todos
+	has_many :works
+	has_many :adjustments
 	has_many :invoices
 	
 	validates_presence_of :name
@@ -30,5 +33,9 @@ class Client < ActiveRecord::Base
   	)
   	line_items << line_item
   	line_item
+	end
+	
+	def default_rate(user)
+		line_items.find(:first, :conditions => ["type='Work' AND start <> finish AND user_id=? AND rate IS NOT NULL", user.id], :order => "start DESC").rate || user.rate
 	end
 end

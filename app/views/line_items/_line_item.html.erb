@@ -8,9 +8,11 @@
 		<td><%= line_item.start.to_s(:slash) %></td>
 		<td><%=h line_item.user.login %></td>
 		<td><%= line_item.start.to_s(:time) %></td>
-		<% if line_item.start == line_item.finish %>
-			<td colspan="4"><%= link_to_remote 'Clock Out', :url => clock_out_path(@client, line_item), :with => "'notes='+escape($('notes_#{line_item.id}').value)"
- %></td>
+		<% if line_item.incomplete? %>
+			<td colspan="2"><%= link_to_remote 'Clock Out', :url => clock_out_path(@client, line_item), :with => "'notes='+escape($('notes_#{line_item.id}').value)+'&rate='+escape($('rate_#{line_item.id}').value)" %></td>
+ 			<td colspan="2">
+ 				<%= text_field_tag "rate_#{line_item.id}", @client.default_rate(current_user), :style => "width: 60px" %>
+ 			</td>
 			<td><%= text_field_tag "notes_#{line_item.id}", line_item.notes, :size => 50 %>
 		<% else %>
 			<td><%= line_item.finish.to_s(:time) %></td>

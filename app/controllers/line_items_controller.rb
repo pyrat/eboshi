@@ -76,7 +76,7 @@ class LineItemsController < ApplicationController
   
   def clock_out
   	@line_item = LineItem.find(params[:id])
-  	@line_item.clock_out(params[:notes])
+  	@line_item.clock_out(params[:rate], params[:notes])
   	
   	render :update do |page|
   		page.replace "line_item_#{@line_item.id}", :partial => 'line_item'

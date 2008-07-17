@@ -60,8 +60,8 @@ class Work < LineItem
 		(hours * rate).round(2)
 	end
 	
-	def clock_out(notes)
-		update_attributes(:finish => Time.now, :notes => notes)
+	def clock_out(rate, notes)
+		update_attributes(:finish => Time.now, :notes => notes, :rate => rate)
 	end
 	
 	def <=> target
@@ -75,6 +75,9 @@ class Work < LineItem
 	def > (target)
 		result = (target < self.start)
 		target.is_a?(Work) ? !result : result
+	end
+	def incomplete?
+		start == finish
 	end
 end
 
