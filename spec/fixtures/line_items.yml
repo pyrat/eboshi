@@ -54,10 +54,10 @@ unbilled2:
   
 todo1:
   client: NANETS
-  type: ToDo
+  type: Todo
   notes: todo 1
 	
 todo2:
   client: NANETS
-  type: ToDo
+  type: Todo
   notes: todo 2

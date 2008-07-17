@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20080713172727) do
+ActiveRecord::Schema.define(:version => 20080717191710) do
 
   create_table "clients", :force => true do |t|
     t.string   "name"
@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(:version => 20080713172727) do
     t.integer  "user_id",    :limit => 11
     t.datetime "start"
     t.datetime "finish"
-    t.integer  "rate",       :limit => 11
+    t.decimal  "rate",                     :precision => 10, :scale => 2
     t.text     "notes"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(:version => 20080713172727) do
     t.datetime "updated_at"
     t.string   "remember_token"
     t.datetime "remember_token_expires_at"
-    t.integer  "rate",                      :limit => 11
+    t.decimal  "rate",                                    :precision => 10, :scale => 2
   end
 
 end

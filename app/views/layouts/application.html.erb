@@ -9,8 +9,12 @@
   <%= stylesheet_link_tag 'scaffold' %>
 </head>
 <body>
+<div style="float: left">
+	<h1><%= link_to 'BOTandROSE Invoicing', clients_path %></h1>
+</div>
 <div style="float: right">
-	Welcome, <%= current_user.name %>!
+	Welcome, <%= current_user.name %>!<br>
+	[<%= link_to 'my account', edit_user_path(current_user) %>]
 </div>
 <div style="clear: both"></div>
 <p style="color: green"><%= flash[:notice] %></p>

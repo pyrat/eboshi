@@ -33,7 +33,7 @@ class LineItem < ActiveRecord::Base
 
 end
 
-class ToDo < LineItem
+class Todo < LineItem
 	validates_presence_of :notes
 
 	def <=> (target)
@@ -82,7 +82,11 @@ class Adjustment < LineItem
 	validates_presence_of :rate
 	
 	def total
-		rate
+		self.rate
+	end
+	
+	def total=(value)
+		self.rate = value
 	end
 	
 	def <=> (target)

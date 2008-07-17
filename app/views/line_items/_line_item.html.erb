@@ -1,6 +1,6 @@
 <tr id="line_item_<%= line_item.id %>">
-	<td><%= check_box_tag 'line_items[]', line_item.id, line_item.checked? %></td>
-	<% if line_item.is_a? ToDo %>
+	<td><%= check_box_tag 'invoice[line_item_ids][]', line_item.id, line_item.checked?, :id => 'invoice_line_items_ids' %></td>
+	<% if line_item.is_a? Todo %>
 		<td>TODO</td>
 		<td colspan="6"></td>
 		<td><%= line_item.notes %></td>

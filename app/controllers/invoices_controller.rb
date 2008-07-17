@@ -26,15 +26,15 @@ class InvoicesController < ApplicationController
 		end
 
 		def new
-		  @invoice = @client.invoices.new
-		  @line_items = @client.line_items.find(:all, :conditions => ["id IN (?)", params[:line_items]]) if params[:line_items]
+			@invoice = @client.invoices.new params[:invoice]
 		end
 
 		def edit
 		end
 
 		def create
-		  @invoice = @client.invoices.new params[:invoice]
+		  @invoice = @client.invoices.new
+		  @invoice.attributes = params[:invoice]
 
 		  if @invoice.save
 		    flash[:notice] = 'Invoice was successfully created.'

@@ -1,17 +1,14 @@
 
 <table width="100%" cellpadding="0" cellspacing="0">
 	<tr>
-		<td><h1><%= link_to 'Home', '/' %> &raquo; <%= @client.name %> &raquo; Billing Details</h1></td>
+		<td><h1><%= @client.name %> &raquo; Billing Details</h1></td>
 		<td align="right">
-			<%= link_to 'New Line Item', new_client_line_item_path %> |
-			<%= link_to 'Create Invoice', new_client_invoice_path %> |
 			<%= link_to 'Import from CSV', import_client_line_items_path %>
 		</td>
 	</tr>
 </table>
 
-<% form_tag new_client_invoice_path(@client), :id => 'line_items_form' do %>
-	<%= hidden_field_tag :invoice_id, nil %>
+<% form_tag new_client_invoice_path(@client), :method => :get, :id => 'new_invoice' do |f| %>
 	<table border="1" cellpadding="4" cellspacing="0">
 		<tr>
 			<td style="padding: 2px; font-size: 11px; text-align: center">
@@ -33,13 +30,13 @@
 			<% if invoice.new_record? %>
 				<tr id="new_todos">
 					<td colspan="8">
-						<%= link_to_remote 'New Todo', :url => create_todo_path(@client), :with => "'line_item[type]=ToDo&line_item[notes]='+escape($('notes_new').value)", :success => "$('notes_new').clear()" %>
+						<%= link_to_remote 'New Todo', :url => create_todo_path(@client), :with => "'line_item[type]=Todo&line_item[notes]='+escape($('notes_new').value)", :success => "$('notes_new').clear()" %>
 					</td>
 					<td><%= text_field_tag 'notes_new' %></td>
 				</tr>
 				<%= render :partial => 'line_item', :collection => @client.todo %>
 				<tr>
-					<td colspan="7"><%= link_to 'Create New', 'javascript:;', :onclick => "$('line_items_form').action = '#{new_client_invoice_path(@client)}'; $('line_items_form').method='get'; $('line_items_form').submit()" %></td>
+					<td colspan="7"><%= link_to_function 'Create New', "$('new_invoice').submit()" %></td>
 					<td align="right"><b><%=number_to_currency @client.balance %></b></td>
 					<td><b>Current Balance</b></td>
 				</tr>
@@ -55,7 +52,7 @@
 					<td align="right"><b><%=number_to_currency invoice.total %></b></td>
 					<td><b>PAID</b></td>
 					<td colspan="2">
-						<%= link_to 'Export PDF', client_invoice_path(@client, invoice) %>
+						<%= link_to 'Export PDF', formatted_client_invoice_path(@client, invoice, :pdf) %>
 						<%= link_to 'Edit', edit_client_invoice_path(@client, invoice) %>
 					</td>
 				</tr>

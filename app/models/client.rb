@@ -17,7 +17,7 @@ class Client < ActiveRecord::Base
 	end
 	
 	def todo
-		line_items.find :all, :conditions => { :type => 'ToDo' }, :order => 'created_at DESC'
+		line_items.find :all, :conditions => { :type => 'Todo' }, :order => 'created_at DESC'
 	end
 	
 	def clock_in(user)

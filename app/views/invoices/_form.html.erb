@@ -1,8 +1,8 @@
 	<table>
-		<% for line_item in @line_items  %>
+		<% for line_item in @invoice.line_items  %>
 		<tr>
-			<td><%= check_box_tag 'line_items[]', line_item.id, true %></td>
-			<td><%= line_item.date.to_s(:slash) %></td>
+			<td><%= check_box_tag 'invoice[line_item_ids][]', line_item.id, true %></td>
+			<td><%= line_item.start.to_s(:slash) %></td>
 			<td><%=h line_item.user.login %></td>
 			<td><%= line_item.start.to_s(:time) %></td>
 			<td><%= line_item.finish.to_s(:time) %></td>
