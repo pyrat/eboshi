@@ -4,6 +4,8 @@ tmp/**/*
 public/cache/**/*
 doc/api
 doc/app
+doc/spec
 db/data.yml
+db/*.sqlite3
 config/database.yml
 *[~]
