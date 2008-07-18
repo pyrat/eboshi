@@ -1,5 +1,6 @@
 class LineItemsController < ApplicationController
 	before_filter :get_client
+	in_place_edit_for :line_item, :notes
 	
 	def get_client
 		@client = Client.find(params[:client_id])

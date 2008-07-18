@@ -19,7 +19,10 @@
 			<td><%= number_with_precision(line_item.hours, 2) %>
 			<td align="right"><%=number_to_currency(line_item.rate, :precision => 0) %></td>
 			<td align="right"><%=number_to_currency line_item.total %></td>
-			<td><%=h line_item.notes %></td>
+			<td>
+				<% @line_item = line_item %>
+				<%= in_place_editor_field :line_item, :notes, {}, :url => url_for({ :action => "set_line_item_notes", :id => line_item.id, :client_id => @client.id }) %>
+			</td>
 		<% end %>
 	<% elsif line_item.is_a? Adjustment %>
 		<td colspan="7" align="right"><%= number_to_currency line_item.total %></td>
