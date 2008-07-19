@@ -1,10 +1,25 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe SessionsController do
+  integrate_views
+  
+	before(:each) do
+		controller.stub!(:authenticate_or_request_with_http_basic).and_return(true)
+		controller.stub!(:current_user).and_return(users(:Micah))
+		@client = clients(:NANETS)
+	end
 
-  #Delete this example and add some real ones
-  it "should use SessionsController" do
-    controller.should be_an_instance_of(SessionsController)
+  describe "should not error out" do
+    it "on new" do
+    	get :new
+		end
+		it "on create" do
+			User.stub!(:authenticate).and_return(users(:Micah))
+			post :create
+		end
+		it "on destroy" do
+			get :destroy
+		end
   end
 
 end

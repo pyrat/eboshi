@@ -1,8 +1,11 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe InvoicesController do
+	integrate_views
+	
 	before(:each) do
 		controller.stub!(:authenticate_or_request_with_http_basic).and_return(true)
+		controller.stub!(:current_user).and_return(users(:Micah))
 	end
   
   describe "responding to GET" do
@@ -112,7 +115,7 @@ describe InvoicesController do
     
   end
 
-  describe "responding to PUT udpate" do
+  describe "responding to PUT update" do
 
     describe "with valid params" do
 
