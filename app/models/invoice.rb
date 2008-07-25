@@ -1,6 +1,6 @@
 class Invoice < ActiveRecord::Base
 	belongs_to :client
-	has_many :line_items
+	has_many :line_items, :dependent => :destroy
 	has_many :todos
 	has_many :works
 	has_many :adjustments

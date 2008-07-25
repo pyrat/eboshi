@@ -1,3 +1,5 @@
+
+<% @line_item = line_item %>
 <tr id="line_item_<%= line_item.id %>">
 	<td><%= check_box_tag 'invoice[line_item_ids][]', line_item.id, line_item.checked?, :id => 'invoice_line_items_ids' %></td>
 	<% if line_item.is_a? Todo %>
@@ -20,7 +22,6 @@
 			<td align="right"><%=number_to_currency(line_item.rate, :precision => 0) %></td>
 			<td align="right"><%=number_to_currency line_item.total %></td>
 			<td>
-				<% @line_item = line_item %>
 				<%= in_place_editor_field :line_item, :notes, {}, :url => url_for({ :action => "set_line_item_notes", :id => line_item.id, :client_id => @client.id }) %>
 			</td>
 		<% end %>
