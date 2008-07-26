@@ -6,3 +6,10 @@ Date.prototype.toSQL = function() {
     this.getMinutes().toPaddedString(2) + ':' +
     this.getSeconds().toPaddedString(2);
 };
+
+function restripe() {
+  $$('tbody[id]~=invoice]').each(function(i, index) {
+    colors = ['white', '#CCCCCC'].reverse()
+    i.style.backgroundColor = colors[index % 2]
+  })
+}

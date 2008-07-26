@@ -95,17 +95,15 @@ class LineItemsController < ApplicationController
   
 	def assign
 	  @invoice = Invoice.find params[:invoice_id]
-	  @invoice.line_item_ids = params[:invoice][:line_item_ids]
+	  @invoice.line_item_ids = (@invoice.line_item_ids + params[:invoice][:line_item_ids]).uniq
 		@invoice.save!
 		
-	  respond_to do |format|
-	    format.html { redirect_to client_line_items_path(@client) }
-	    format.js do
-		    render :update do |page|
-			    page.remove params[:invoice][:line_item_ids].collect {|id| "line_item_#{id}"}
-			    page.replace "invoice_#{@invoice.id}", :partial => 'invoice', :object => @invoice
-		    end
-	    end
+    render :update do |page|
+      params[:invoice][:line_item_ids].each do |id|
+        page.remove "line_item_#{id}"
+      end	    
+	    page.replace "invoice_#{@invoice.id}", :partial => 'invoice', :object => @invoice
+	    page.call 'restripe'
     end
 	end
 
@@ -116,13 +114,8 @@ class LineItemsController < ApplicationController
 	    li.save
 	  end
 		
-	  respond_to do |format|
-	    format.html { redirect_to client_line_items_path(@client) }
-	    format.js do
-		    render :update do |page|
-			    page.remove params[:invoice][:line_item_ids].collect {|id| "line_item_#{id}"}
-		    end
-	    end
+    render :update do |page|
+	    page.remove params[:invoice][:line_item_ids].collect {|id| "line_item_#{id}"}
     end
   end
   
