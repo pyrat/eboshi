@@ -152,7 +152,9 @@ class LineItemsController < ApplicationController
   		end
   		
   		if li.notes == "PAID"
-	  		#Payment.create :client_id => @client.id, :total => row[map.index('total')].to_i * -1, :date => row[map.index('created_at')], :paid => row[map.index('created_at')]
+  		  i = @client.invoices.build :date => row[map.index('created_at')], :paid => row[map.index('created_at')], :project_name => @client.name
+  		  i.total = row[map.index('total')].to_i * -1
+  		  i.save!  		  
   		else
   		  li.type = 'Work'
   			li.finish = li.finish.advance(:days => 1) if li.finish < li.start 
