@@ -94,6 +94,7 @@ class LineItemsController < ApplicationController
   end
   
 	def assign
+	  @invoice = Invoice.find params[:invoice_id]
 	  @invoice.line_item_ids = params[:invoice][:line_item_ids]
 		@invoice.save!
 		
