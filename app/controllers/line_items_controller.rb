@@ -125,8 +125,10 @@ class LineItemsController < ApplicationController
   def doimport
   	require 'csv'
   	
-  	@client.line_items.destroy_all
-  	@client.payments.destroy_all
+  	if params[:clear] == 1
+    	@client.line_items.destroy_all
+    	@client.invoices.destroy_all
+    end
   	
   	map = nil
   	CSV::Reader.parse(params[:csv]) do |row|
@@ -150,8 +152,9 @@ class LineItemsController < ApplicationController
   		end
   		
   		if li.notes == "PAID"
-	  		Payment.create :client_id => @client.id, :total => row[map.index('total')].to_i * -1, :date => row[map.index('created_at')], :paid => row[map.index('created_at')]
+	  		#Payment.create :client_id => @client.id, :total => row[map.index('total')].to_i * -1, :date => row[map.index('created_at')], :paid => row[map.index('created_at')]
   		else
+  		  li.type = 'Work'
   			li.finish = li.finish.advance(:days => 1) if li.finish < li.start 
   			li.save!
   		end

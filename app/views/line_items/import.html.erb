@@ -2,5 +2,6 @@
 
 <% form_tag doimport_client_line_items_path(@client), { :multipart => true } do %>
 	<b>CSV File</b> <%= file_field_tag :csv %><br>
+	<%= check_box_tag :clear, 1 %> Replace?<br>
 	<%= submit_tag 'Import' %>
 <% end %>

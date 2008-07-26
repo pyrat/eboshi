@@ -23,4 +23,11 @@ class LineItem < ActiveRecord::Base
 	def checked?
 		invoice_id.nil?
 	end
+	
+	def user_name=(name)
+		unless name.nil?
+			user = User.find_by_login(name)
+			user_id = user.try(:id)
+		end
+	end
 end
