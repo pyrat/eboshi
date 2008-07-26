@@ -2,8 +2,8 @@ ActionController::Routing::Routes.draw do |map|
 	map.root :controller => 'clients', :action => 'index'
 
   map.resources :clients do |client|
-	  client.resources :line_items, :collection => [:import, :doimport]
-	  client.resources :invoices, :member => [:assign]
+	  client.resources :line_items, :collection => [:import, :doimport, :assign, :unassign]
+	  client.resources :invoices
 	end
 	
 	map.create_todo '/clients/:client_id/create_todo', :controller => 'line_items', :action => 'create_todo'

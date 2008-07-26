@@ -60,10 +60,4 @@ class InvoicesController < ApplicationController
 		  redirect_to client_line_items_path(@client)
 		end
 		
-		def assign
-			@invoice.line_item_ids = params[:line_items]
-			@invoice.save
-			
-		  redirect_to client_line_items_path(@client)
-		end
 end

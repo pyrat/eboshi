@@ -92,7 +92,38 @@ class LineItemsController < ApplicationController
 			page.insert_html :after, 'new_todos', :partial => 'line_item'
 		end
   end
+  
+	def assign
+	  @invoice.line_item_ids = params[:invoice][:line_item_ids]
+		@invoice.save!
+		
+	  respond_to do |format|
+	    format.html { redirect_to client_line_items_path(@client) }
+	    format.js do
+		    render :update do |page|
+			    page.remove params[:invoice][:line_item_ids].collect {|id| "line_item_#{id}"}
+			    page.replace "invoice_#{@invoice.id}", :partial => 'invoice', :object => @invoice
+		    end
+	    end
+    end
+	end
 
+  def unassign
+	  params[:invoice][:line_item_ids].each do |id|
+	    li = LineItem.find(id)
+	    li.invoice = nil
+	    li.save
+	  end
+		
+	  respond_to do |format|
+	    format.html { redirect_to client_line_items_path(@client) }
+	    format.js do
+		    render :update do |page|
+			    page.remove params[:invoice][:line_item_ids].collect {|id| "line_item_#{id}"}
+		    end
+	    end
+    end
+  end
   
   def import
   end

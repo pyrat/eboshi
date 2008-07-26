@@ -1,34 +1,6 @@
-
-<% @line_item = line_item %>
 <tr id="line_item_<%= line_item.id %>">
-	<td><%= check_box_tag 'invoice[line_item_ids][]', line_item.id, line_item.checked?, :id => 'invoice_line_items_ids' %></td>
-	<% if line_item.is_a? Todo %>
-		<td>TODO</td>
-		<td colspan="6"></td>
-		<td><%= line_item.notes %></td>
-	<% elsif line_item.is_a? Work %>
-		<td><%= line_item.start.to_s(:slash) %></td>
-		<td><%=h line_item.user.login %></td>
-		<td><%= line_item.start.to_s(:time) %></td>
-		<% if line_item.incomplete? %>
-			<td colspan="2"><%= link_to_remote 'Clock Out', :url => clock_out_path(@client, line_item), :with => "'notes='+escape($('notes_#{line_item.id}').value)+'&rate='+escape($('rate_#{line_item.id}').value)" %></td>
- 			<td colspan="2">
- 				<%= text_field_tag "rate_#{line_item.id}", line_item.rate, :style => "width: 60px" %>
- 			</td>
-			<td><%= text_field_tag "notes_#{line_item.id}", line_item.notes, :size => 50 %>
-		<% else %>
-			<td><%= line_item.finish.to_s(:time) %></td>
-			<td><%= number_with_precision(line_item.hours, 2) %>
-			<td align="right"><%=number_to_currency(line_item.rate, :precision => 0) %></td>
-			<td align="right"><%=number_to_currency line_item.total %></td>
-			<td>
-				<%= in_place_editor_field :line_item, :notes, {}, :url => url_for({ :action => "set_line_item_notes", :id => line_item.id, :client_id => @client.id }) %>
-			</td>
-		<% end %>
-	<% elsif line_item.is_a? Adjustment %>
-		<td colspan="7" align="right"><%= number_to_currency line_item.total %></td>
-		<td><i>Adjustment</i></td>
-	<% end %>
+	<td><%= check_box_tag 'invoice[line_item_ids][]', line_item.id, line_item.checked?, :id => "line_item_#{line_item.id}" %></td>
+	<%= render :partial => line_item.class.to_s.underscore, :object => line_item %>
 	<td><%= link_to 'Edit', edit_client_line_item_path(@client, line_item) %></td>
 	<td><%= link_to_remote 'Destroy', :url => client_line_item_path(@client, line_item), :confirm => 'Are you sure?', :method => :delete %></td>
 </tr>

@@ -8,7 +8,7 @@
 	</tr>
 </table>
 
-<% form_tag new_client_invoice_path(@client), :method => :get, :id => 'new_invoice' do |f| %>
+<% form_tag new_client_invoice_path(@client), :method => :get, :id => 'new_invoice' do %>
 	<table border="1" cellpadding="4" cellspacing="0">
 		<tr>
 			<td style="padding: 2px; font-size: 11px; text-align: center">
@@ -25,43 +25,7 @@
 		  <th>Notes</th>
 		</tr>
 
-	<% for invoice in @invoices  %>
-		<tbody style="background-color: <%= cycle 'white', '#CCCCCC' %>">
-			<% if invoice.new_record? %>
-				<tr id="new_todos">
-					<td colspan="8">
-						<%= link_to_remote 'New Todo', :url => create_todo_path(@client), :with => "'line_item[type]=Todo&line_item[notes]='+escape($('notes_new').value)", :success => "$('notes_new').clear()" %>
-					</td>
-					<td><%= text_field_tag 'notes_new' %></td>
-				</tr>
-				<%= render :partial => 'line_item', :collection => @client.todo %>
-				<tr>
-					<td colspan="7"><%= link_to_function 'Create New', "$('new_invoice').submit()" %></td>
-					<td align="right"><b><%=number_to_currency @client.balance %></b></td>
-					<td><b>Current Balance</b></td>
-				</tr>
-				<tr id="new_line_items">
-					<td colspan="9">
-						<%= link_to_remote 'Clock In', :url => clock_in_path(@client) %>
-					</td>
-				</tr>
-			<% else %>
-				<tr>
-					<td><%= link_to 'Assign', 'javascript:;', :onclick => "$('line_items_form').action = '#{assign_client_invoice_path(@client, invoice)}'; $('line_items_form').submit()" %></td>
-					<td colspan="6"><%= invoice.date.to_s(:slash) if invoice.date %></td>
-					<td align="right"><b><%=number_to_currency invoice.total %></b></td>
-					<td><b>PAID</b></td>
-					<td colspan="2">
-						<%= link_to 'Export PDF', formatted_client_invoice_path(@client, invoice, :pdf) %>
-						<%= link_to 'Edit', edit_client_invoice_path(@client, invoice) %>
-						<%= link_to 'Delete', client_invoice_path(@client, invoice), :method => :delete, :confirm => 'Are you certain you want to delete this invoice and its hours and notes?' %>
-					</td>
-				</tr>
-			<% end %>
-			
-			<%= render :partial => 'line_item', :collection => invoice.line_items.sort %>
-		</tbody>
-	<% end %>
+  	<%= render :partial => 'invoice', :collection => @invoices %>
 
 	</table>
 	
