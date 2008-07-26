@@ -151,7 +151,7 @@ class LineItemsController < ApplicationController
 	  		li.client = @client 		
   		end
   		
-  		if li.notes == "PAID"
+  		if li.notes =~ /paid/i
   		  i = @client.invoices.build :date => row[map.index('created_at')], :paid => row[map.index('created_at')], :project_name => @client.name
   		  i.total = row[map.index('total')].to_i * -1
   		  i.save!  		  

@@ -93,16 +93,23 @@ class InvoiceDrawer
 			tab.row_gap				= pdf.in2pts(0.1)
 			
 			data = []
-			for line_item in invoice.line_items
+			for work in invoice.works
 				data << {
-					"Agent" => line_item.user.login,
-					"Item" => line_item.notes.word_wrap(60),
-					"Hours" => line_item.hours,
-					"Rate" => number_to_currency(line_item.rate),
-					"Cost" => number_to_currency(line_item.total)
+					"Agent" => work.user.login,
+					"Item" => work.notes.word_wrap(60),
+					"Hours" => work.hours,
+					"Rate" => number_to_currency(work.rate),
+					"Cost" => number_to_currency(work.total)
 				}
 			end
 
+			for adjustment in invoice.adjustments
+				data << {
+					"Item" => 'Adjustment ' + (adjustment.notes ? adjustment.notes.word_wrap(60) : ''),
+					"Cost" => number_to_currency(adjustment.total)
+				}
+			end
+			
 			data << {
 				"Item" => "Total",
 				"Cost" => number_to_currency(invoice.total)
