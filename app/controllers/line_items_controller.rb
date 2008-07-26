@@ -44,7 +44,7 @@ class LineItemsController < ApplicationController
   # PUT /line_items/1
   def update
     @line_item = LineItem.find(params[:id])
-    if @line_item.update_attributes(params[:line_item])
+    if @line_item.update_attributes(params[@line_item.class.to_s.underscore])
       flash[:notice] = 'LineItem was successfully updated.'
       redirect_to client_line_items_path(@client) 
     else
