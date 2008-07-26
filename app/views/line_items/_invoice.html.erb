@@ -20,7 +20,7 @@
 	<% else %>
 		<tr>
 			<td>
-			  <%= link_to_remote 'Assign', :url => assign_client_line_items_path(@client), :with => "Form.serializeElements( $('new_invoice').getInputs('checkbox') )" %>
+			  <%= link_to_remote 'Assign', :url => assign_client_line_items_path(@client), :with => "Form.serializeElements( $('new_invoice').getInputs('checkbox') )+'&invoice_id=#{invoice.id}'" %>
 			  <%= link_to_remote 'Unassign', :url => unassign_client_line_items_path(@client), :with => "Form.serializeElements( $('new_invoice').getInputs('checkbox') )" %>
 			</td>
 			<td colspan="6"><%= invoice.date.to_s(:slash) if invoice.date %></td>
