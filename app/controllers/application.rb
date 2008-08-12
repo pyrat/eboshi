@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
   # Uncomment the :secret if you're not using the cookie session store
   protect_from_forgery # :secret => '777e12608199867e6528eb1a3556d20d'
   
-  before_filter :authenticate
+  # before_filter :authenticate
   
   protected
 
