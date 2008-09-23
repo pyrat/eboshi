@@ -1,6 +1,8 @@
 class LineItemsController < ApplicationController
 	before_filter :get_client
 	in_place_edit_for :line_item, :notes
+	in_place_edit_for :line_item, :rate
+	in_place_edit_for :todo, :notes
 	
 	def get_client
 		@client = Client.find(params[:client_id])
@@ -35,7 +37,7 @@ class LineItemsController < ApplicationController
 		
 		if @line_item.save
 		  flash[:notice] = 'LineItem was successfully created.'
-		  redirect_to client_line_items_path(@client)
+		  redirect_to line_items_path(@client)
 		else
 		  render :action => "new"
 		end
@@ -46,7 +48,7 @@ class LineItemsController < ApplicationController
     @line_item = LineItem.find(params[:id])
     if @line_item.update_attributes(params[@line_item.class.to_s.underscore])
       flash[:notice] = 'LineItem was successfully updated.'
-      redirect_to client_line_items_path(@client) 
+      redirect_to line_items_path(@client) 
     else
       render :action => "edit" 
     end
@@ -58,7 +60,7 @@ class LineItemsController < ApplicationController
     @line_item.destroy
 
 		respond_to do |format|
-			format.html { redirect_to client_line_items_path(@client) }
+			format.html { redirect_to line_items_path(@client) }
 			format.js do
 				render :update do |page|
 					page.remove "line_item_#{@line_item.id}"
@@ -82,15 +84,6 @@ class LineItemsController < ApplicationController
   	render :update do |page|
   		page.replace "line_item_#{@line_item.id}", :partial => 'line_item'
   	end
-  end
-  
-  def create_todo
-    @line_item = Todo.new(params[:line_item])
-    @client.line_items << @line_item
-		
-		render :update do |page|
-			page.insert_html :after, 'new_todos', :partial => 'line_item'
-		end
   end
   
 	def assign
@@ -162,6 +155,6 @@ class LineItemsController < ApplicationController
   		end
 
 		end
-		redirect_to client_line_items_path(@client)
+		redirect_to line_items_path(@client)
   end
 end

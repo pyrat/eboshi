@@ -65,16 +65,3 @@ incomplete2:
   finish: '2000-12-31 08:00:00'
   rate: 50
   type: Work
-  
-todo1:
-  client: NANETS
-  type: Todo
-  notes: todo 1
-  user: Micah
-	
-todo2:
-  client: NANETS
-  type: Todo
-  notes: todo 2
-  user: Micah
-

@@ -1,3 +1,4 @@
+- @work = work
 %td= work.start.to_s(:slash)
 %td=h work.user.login
 %td= work.start.to_s(:time)
@@ -8,8 +9,7 @@
 - else
   %td= work.finish.to_s(:time)
   %td= number_with_precision work.hours, 2
-  %td{ :align => "right" }= number_to_currency work.rate, :precision => 0
+  %td{ :align => "right" }= in_place_editor_field :work, :rate, {}, :url => url_for({ :action => "set_line_item_rate", :id => work.id, :client_id => work.client.id }) # number_to_currency work.rate, :precision => 0
   %td{ :align => "right" }= number_to_currency work.total
   %td
-    - @work = work
     = in_place_editor_field :work, :notes, {}, :url => url_for({ :action => "set_line_item_notes", :id => work.id, :client_id => work.client.id })

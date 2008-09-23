@@ -2,7 +2,7 @@
 
 <%= error_messages_for :invoice %>
 
-<% form_for(@invoice, :url => [@client, @invoice]) do |f| %>
+<% form_for @invoice, :url => invoice_path(@client, @invoice) do |f| %>
 
 	<%= render :partial => 'form', :object => f %>
 
@@ -11,4 +11,4 @@
   </p>
 <% end %>
 
-<%= link_to 'Cancel', client_line_items_path(@client) %>
+<%= link_to 'Cancel', line_items_path(@client) %>

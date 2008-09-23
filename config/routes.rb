@@ -2,11 +2,11 @@ ActionController::Routing::Routes.draw do |map|
 	map.root :controller => 'clients', :action => 'index'
 
   map.resources :clients do |client|
-	  client.resources :line_items, :collection => [:import, :doimport, :assign, :unassign]
-	  client.resources :invoices
+	  client.resources :line_items, :collection => [:import, :doimport, :assign, :unassign], :name_prefix => nil
+	  client.resources :todos, :name_prefix => nil
+	  client.resources :invoices, :name_prefix => nil
 	end
 	
-	map.create_todo '/clients/:client_id/create_todo', :controller => 'line_items', :action => 'create_todo'
 	map.clock_in '/clients/:client_id/clock_in', :controller => 'line_items', :action => 'clock_in'
 	map.clock_out '/clients/:client_id/line_item/:id/clock_out', :controller => 'line_items', :action => 'clock_out'
   

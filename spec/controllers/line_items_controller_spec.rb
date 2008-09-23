@@ -14,9 +14,6 @@ describe LineItemsController do
     it "on index" do
       get :index, :client_id => @client.id
     end
-    it "on show" do
-      get :show, :client_id => @client.id, :id => @line_item.id
-    end
     it "on edit" do
       get :edit, :client_id => @client.id, :id => @line_item.id
     end
@@ -40,9 +37,6 @@ describe LineItemsController do
 			@line_item = line_items(:incomplete1)
 			get :clock_out, :client_id => @client.id, :id => @line_item.id, :rate => 50
 		end
-		it "on create_todo" do
-			post :create_todo, :client_id => @client.id, :line_item => { :notes => 'test' }
-	  end
 		it "on import" do
 			get :import, :client_id => @client.id
 		end

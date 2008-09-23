@@ -1,32 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe LineItem do
-	describe "todo" do
-		before(:each) do
-			@line_item = line_items(:todo1)
-		end
-	
-		it "should calculate the total correctly" do
-			@line_item.total.should == 0
-		end
-		
-		it "should calculate the hours correctly" do
-			@line_item.hours.should == 0
-		end
-	
-		it "should be less than all other line items" do
-			(@line_item < line_items(:billed1)).should == true
-			(@line_item > line_items(:billed1)).should == false
-			(@line_item == line_items(:todo1)).should == true
-			(@line_item == line_items(:billed1)).should == false
-			(@line_item <=> line_items(:billed1)).should == -1
-		end
-		
-		it "should not be checked" do
-			@line_item.checked?.should be_false
-		end
-	end
-
 	describe "work" do
 		describe "billed" do
 			before(:each) do
@@ -47,12 +21,6 @@ describe LineItem do
 				(line_items(:billed1) <=> line_items(:billed2)).should == 1
 			end
 		
-			it "should be greater than todo items" do
-				(@line_item > line_items(:todo1)).should == true
-				(@line_item < line_items(:todo1)).should == false
-				(@line_item <=> line_items(:todo1)).should == 1
-			end
-
 			it "should be less than adjustment items" do
 				(@line_item < line_items(:adjustment1)).should == true
 				(@line_item > line_items(:adjustment1)).should == false

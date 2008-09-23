@@ -3,12 +3,24 @@
 	<tr>
 		<td><h1><%= @client.name %> &raquo; Billing Details</h1></td>
 		<td align="right">
-			<%= link_to 'Import from CSV', import_client_line_items_path %>
+			<%= link_to 'Import from CSV', import_line_items_path %>
 		</td>
 	</tr>
 </table>
 
-<% form_tag new_client_invoice_path(@client), :method => :get, :id => 'new_invoice' do %>
+<table border="1" cellpadding="4" cellspacing="0">
+  <tr><th colspan="2">TODOS</th></tr>
+	<tr id="new_todos">
+		<td>
+			<%= link_to_remote 'New Todo', :url => todos_path(@client), :with => "'todo[notes]='+escape($('notes_new').value)", :success => "$('notes_new').clear()" %>
+		</td>
+		<td><%= text_field_tag 'notes_new' %></td>
+	</tr>
+	<%= render :partial => 'todo', :collection => @client.todos %>
+</table>
+<br />
+
+<% form_tag new_invoice_path(@client), :method => :get, :id => 'new_invoice' do %>
 	<table border="1" cellpadding="4" cellspacing="0">
 		<tr>
 			<td style="padding: 2px; font-size: 11px; text-align: center">
@@ -24,7 +36,7 @@
 		  <th>Total</th>
 		  <th>Notes</th>
 		</tr>
-
+		
   	<%= render :partial => 'invoice', :collection => @invoices %>
 
 	</table>

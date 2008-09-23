@@ -38,7 +38,7 @@ class InvoicesController < ApplicationController
 
 		  if @invoice.save
 		    flash[:notice] = 'Invoice was successfully created.'
-		    redirect_to client_line_items_path(@client)
+		    redirect_to line_items_path(@client)
 		  else
 		    render :action => "new"
 		  end
@@ -47,7 +47,7 @@ class InvoicesController < ApplicationController
 		def update
 		  if @invoice.update_attributes params[:invoice]
 		    flash[:notice] = 'Invoice was successfully updated.'
-		    redirect_to client_line_items_path(@client)
+		    redirect_to line_items_path(@client)
 		  else
 		    render :action => "edit" 
 		  end
@@ -57,7 +57,7 @@ class InvoicesController < ApplicationController
 		  @invoice.destroy
 		  flash[:notice] = 'Invoice was successfully deleted.'
 
-		  redirect_to client_line_items_path(@client)
+		  redirect_to line_items_path(@client)
 		end
 		
 end

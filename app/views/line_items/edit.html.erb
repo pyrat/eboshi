@@ -2,7 +2,7 @@
 
 <%= error_messages_for :line_item %>
 
-<% form_for @line_item, :url => client_line_item_path(@client, @line_item) do |f| %>
+<% form_for @line_item, :url => line_item_path(@client, @line_item) do |f| %>
   <p>
     <b>User</b><br />
     <%= f.select :user_id, User.to_select %>
@@ -33,4 +33,4 @@
   </p>
 <% end %>
 
-<%= link_to 'Back', client_line_items_path(@client) %>
+<%= link_to 'Back', line_items_path(@client) %>

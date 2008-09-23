@@ -23,7 +23,7 @@ describe Client do
   end
 
 	it "should provide a todo list" do
-		@client.todo.length.should == 2
+		@client.todos.length.should == 2
 	end
 	
 	it "should calculate a default rate given a user" do

@@ -1,17 +1,14 @@
-class Todo < LineItem
-	validates_presence_of :notes
+class Todo < ActiveRecord::Base
+	belongs_to :client
+	belongs_to :user
 
-	def <=> (target)
-		-1
-	end
-	def < (target)
-		true
-	end
-	def > (target)
-		false
-	end
-	
-	def checked?
-		false
+	validates_presence_of :notes
+	validates_presence_of :user
+
+	def user_name=(name)
+		unless name.nil?
+			user = User.find_by_login(name)
+			user_id = user.try(:id)
+		end
 	end
 end

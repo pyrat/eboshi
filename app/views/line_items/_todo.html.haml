@@ -1,3 +1,6 @@
-%td TODO
-%td{ :colspan => '6' }
-%td= todo.notes
+- @todo = todo
+%tr[todo]
+  %td= todo.user.name
+  %td
+    = in_place_editor_field :todo, :notes, {}, :url => url_for({ :action => "set_todo_notes", :id => todo.id, :client_id => todo.client.id })
+  %td= link_to_remote 'Destroy', :url => todo_path(@client, todo), :confirm => 'Are you sure?', :method => :delete
