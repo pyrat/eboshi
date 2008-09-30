@@ -15,7 +15,7 @@ class Client < ActiveRecord::Base
 	end
 
 	def invoices_with_unbilled
-    [build_invoice_from_unbilled] + invoices 
+    [build_invoice_from_unbilled] + invoices.all(:order => 'date DESC')
 	end
 	
 	def balance
