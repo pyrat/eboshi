@@ -3,7 +3,23 @@ class InvoiceDrawer
 	def draw(invoice)
 		pdf = PDF::Writer.new
 		pdf.select_font("Times-Roman")
+
+		pdf.y = pdf.in2pts(2.25)
+		pdf.text "make check payable to: micah geisel"
+		pdf.text "sincerely,"
 		
+		sign_height = pdf.y
+		pdf.add_image_from_file "#{RAILS_ROOT}/public/images/pdf/micah_signature.png", pdf.in2pts(1), pdf.y-pdf.in2pts(1), pdf.in2pts(3), pdf.in2pts(1)
+		pdf.y = pdf.y - pdf.in2pts(1)
+
+		pdf.text "micah geisel", :left => pdf.in2pts(1)
+		
+		pdf.y = sign_height
+		pdf.add_image_from_file "#{RAILS_ROOT}/public/images/pdf/michael_signature.png", pdf.in2pts(4), pdf.y- pdf.in2pts(1), pdf.in2pts(3), pdf.in2pts(1)
+		pdf.y = pdf.y - pdf.in2pts(1)
+
+		pdf.text "michael gubitosa", :left => pdf.in2pts(5)
+	
 		pdf.add_image_from_file "#{RAILS_ROOT}/public/images/pdf/fleur.png", pdf.in2pts(5), pdf.in2pts(9), pdf.in2pts(3), pdf.in2pts(1.5)
 		
 		pdf.y = pdf.in2pts(10.4)
@@ -97,7 +113,7 @@ class InvoiceDrawer
 				data << {
 					"Agent" => work.user.login,
 					"Item" => work.notes.word_wrap(60),
-					"Hours" => work.hours,
+					"Hours" => work.hours.round(2),
 					"Rate" => number_to_currency(work.rate),
 					"Cost" => number_to_currency(work.total)
 				}
@@ -119,22 +135,6 @@ class InvoiceDrawer
 			tab.render_on(pdf)
 		end
 		
-		pdf.y = pdf.in2pts(2.25)
-		pdf.text "make check payable to: micah geisel"
-		pdf.text "sincerely,"
-		
-		sign_height = pdf.y
-		pdf.add_image_from_file "#{RAILS_ROOT}/public/images/pdf/micah_signature.png", pdf.in2pts(1), pdf.y-pdf.in2pts(1), pdf.in2pts(3), pdf.in2pts(1)
-		pdf.y = pdf.y - pdf.in2pts(1)
-
-		pdf.text "micah geisel", :left => pdf.in2pts(1)
-		
-		pdf.y = sign_height
-		pdf.add_image_from_file "#{RAILS_ROOT}/public/images/pdf/michael_signature.png", pdf.in2pts(4), pdf.y- pdf.in2pts(1), pdf.in2pts(3), pdf.in2pts(1)
-		pdf.y = pdf.y - pdf.in2pts(1)
-
-		pdf.text "michael gubitosa", :left => pdf.in2pts(5)
-
 		pdf.render
 	end
 end
