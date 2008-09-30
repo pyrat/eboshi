@@ -35,7 +35,7 @@ class InvoicesController < ApplicationController
 		def create
 		  @invoice = @client.invoices.new
 		  @invoice.attributes = params[:invoice]
-
+		  @invoice.paid = nil if params[:invoice][:paid] == "0"
 		  if @invoice.save
 		    flash[:notice] = 'Invoice was successfully created.'
 		    redirect_to line_items_path(@client)
@@ -45,7 +45,9 @@ class InvoicesController < ApplicationController
 		end
 
 		def update
-		  if @invoice.update_attributes params[:invoice]
+		  @invoice.attributes = params[:invoice]
+		  @invoice.paid = nil if params[:invoice][:paid] == "0"
+		  if @invoice.save
 		    flash[:notice] = 'Invoice was successfully updated.'
 		    redirect_to line_items_path(@client)
 		  else
@@ -58,6 +60,15 @@ class InvoicesController < ApplicationController
 		  flash[:notice] = 'Invoice was successfully deleted.'
 
 		  redirect_to line_items_path(@client)
+		end
+		
+		def paid
+		  if @invoice.update_attribute :paid, Date.today
+		    flash[:notice] = 'Invoice was successfully updated.'
+		    redirect_to line_items_path(@client)
+		  else
+		    render :action => "edit" 
+		  end
 		end
 		
 end

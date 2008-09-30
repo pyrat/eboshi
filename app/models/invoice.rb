@@ -5,11 +5,11 @@ class Invoice < ActiveRecord::Base
 	has_many :works
 	has_many :adjustments
 	
-	validates_presence_of :client, :date, :paid, :project_name
+	validates_presence_of :client, :date, :project_name
 	
 	def initialize(options = {})
 		options = {} if options.nil?
-		options.reverse_merge!(:date => Date.today, :paid => Date.today)
+		options.reverse_merge!(:date => Date.today)
 		super
 	end
 
@@ -19,7 +19,7 @@ class Invoice < ActiveRecord::Base
 	
 	def total=(value)
 		difference = value.to_f - total
-		return total if difference == 0
+		return total if difference < 0.01
 		adjustments << Adjustment.new(:client => client, :total => difference)
 	end
 	

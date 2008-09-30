@@ -3,6 +3,10 @@ module ActiveRecord
     def self.to_select(conditions = nil)
       find(:all).collect { |x| [x.name,x.id] }
     end
+    
+    def id_or_new
+      id ? id.to_s : 'new'
+    end
   end
 end
 

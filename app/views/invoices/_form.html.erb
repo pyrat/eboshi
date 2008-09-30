@@ -3,10 +3,10 @@
 		<tr>
 			<td><%= check_box_tag 'invoice[line_item_ids][]', line_item.id, true %></td>
 			<td><%= line_item.start.to_s(:slash) if line_item.start %></td>
-			<td><%=h line_item.user.login %></td>
+			<td><%=h line_item.user.name %></td>
 			<td><%= line_item.start.to_s(:time) if line_item.start %></td>
 			<td><%= line_item.finish.to_s(:time) if line_item.finish %></td>
-			<td><%= line_item.hours %>
+			<td><%= number_with_precision line_item.hours, 2 %>
 			<td><%=number_to_currency(line_item.rate, :precision => 0) %></td>
 			<td><%=number_to_currency line_item.total %></td>
 			<td><%=h line_item.notes %></td>
@@ -21,6 +21,7 @@
 	
 	<p>
 		<b>Paid</b><br>
+		<%= form.check_box :paid %>
 		<%= form.date_select :paid %>
 	</p>
 	

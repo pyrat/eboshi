@@ -43,6 +43,9 @@ describe LineItemsController do
   	it "on doimport" do
   		post :import, :client_id => @client.id
   	end
+  	it "on merge" do
+  		post :merge, :client_id => @client.id, :invoice => { :line_item_ids => [line_items(:billed1).id, line_items(:billed2).id] }
+  	end
   	
   end
 end

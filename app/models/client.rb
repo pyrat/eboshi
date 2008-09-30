@@ -6,6 +6,17 @@ class Client < ActiveRecord::Base
 	has_many :invoices
 	
 	validates_presence_of :name
+
+	def build_invoice_from_unbilled
+  	invoice = Invoice.new
+  	invoice.client = self
+    invoice.line_items = line_items.unbilled
+    invoice
+	end
+
+	def invoices_with_unbilled
+    [build_invoice_from_unbilled] + invoices 
+	end
 	
 	def balance
 		credits - debits

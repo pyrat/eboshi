@@ -14,10 +14,10 @@ describe Invoice do
     Invoice.create!(@valid_attributes)
   end
   
-  it "should default date and paid to today" do
+  it "should default date and paid to nil" do
   	@invoice = Invoice.new
   	@invoice.date.should == Time.today
-  	@invoice.paid.should == Time.today
+  	@invoice.paid.should == nil
   end
   
   it "should create an adjustment item when a total is assigned that doesnt equal the sum of the line items" do

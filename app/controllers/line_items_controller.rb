@@ -10,10 +10,7 @@ class LineItemsController < ApplicationController
 	
   # GET /line_items
   def index
-    @invoices = @client.invoices.find(:all, :order => 'date DESC')
-    invoice = Invoice.new
-    invoice.line_items = @client.line_items.find(:all, :conditions => "invoice_id IS NULL AND start IS NOT NULL", :order => 'start DESC')
-    @invoices.unshift invoice
+    @invoices = @client.invoices_with_unbilled
   end
 
   # GET /line_items/1
@@ -98,6 +95,14 @@ class LineItemsController < ApplicationController
 	    page.replace "invoice_#{@invoice.id}", :partial => 'invoice', :object => @invoice
 	    page.call 'restripe'
     end
+	end
+	
+	def merge
+	  work = Work.merge_from_ids params[:invoice][:line_item_ids]
+	  @invoice = work.invoice || @client.build_invoice_from_unbilled
+	  render :update do |page|
+	    page.replace "invoice_#{@invoice.id_or_new}", :partial => 'invoice', :object => @invoice
+	  end
 	end
 
   def unassign

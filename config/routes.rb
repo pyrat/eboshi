@@ -2,9 +2,9 @@ ActionController::Routing::Routes.draw do |map|
 	map.root :controller => 'clients', :action => 'index'
 
   map.resources :clients do |client|
-	  client.resources :line_items, :collection => [:import, :doimport, :assign, :unassign], :name_prefix => nil
+	  client.resources :line_items, :collection => [:import, :doimport, :assign, :unassign, :merge], :name_prefix => nil
 	  client.resources :todos, :name_prefix => nil
-	  client.resources :invoices, :name_prefix => nil
+	  client.resources :invoices, :name_prefix => nil, :member => [:paid]
 	end
 	
 	map.clock_in '/clients/:client_id/clock_in', :controller => 'line_items', :action => 'clock_in'

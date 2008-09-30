@@ -32,6 +32,9 @@ describe InvoicesController do
     it "on create" do
       post :create, :client_id => @client.id, :invoice => @invoice.attributes
     end
+    it "on paid" do
+      post :paid, :client_id => @client.id, :id => @invoice.id
+    end
   	
   end
 end
