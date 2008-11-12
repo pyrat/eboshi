@@ -1,29 +1,44 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
   <title>Invoices: <%= controller.action_name %></title>
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
   <%= javascript_include_tag :defaults %>
-  <%= stylesheet_link_tag 'scaffold' %>
-  
+  <%= stylesheet_link_tag 'default'%>
+
   <!-- Favicon -->
 <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" />
 
 </head>
 <body>
-<div style="float: left">
-	<h1><%= link_to 'BOTandROSE Invoicing', clients_path %></h1>
+<div id="wrapper">
+<!-- start header -->
+<div id="header">
+	<h1>BOTandROSE Invoicing</h1>
+	<p>Simple rails invoicing application</p>
 </div>
 <div style="float: right">
 	Welcome, <%= current_user.name %>!<br>
 	[<%= link_to 'my account', edit_user_path(current_user) %>]
 </div>
-<div style="clear: both"></div>
-<p style="color: green"><%= flash[:notice] %></p>
-
-<%= yield  %>
-
+<!-- end header -->
+<!-- start page -->
+<div id="page">
+	<!-- start content -->
+	<div id="content">
+	  <p style="color: green"><%= flash[:notice] %></p>
+    <%= yield  %>
+	</div>
+	<!-- end content -->
+	
+	<!-- end sidebar -->
+</div>
+<!-- end page -->
+<div id="footer">
+	<p>Welcome to the footer.</p>
+</div>
 </body>
 </html>
