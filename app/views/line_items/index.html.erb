@@ -41,12 +41,10 @@
 
 </table>
 
-<% form_tag new_invoice_path(@client), :method => :get, :id => 'new_invoice' do %>
-	<% javascript_tag do %>
-		function select_all(flag) {
-			$$('input[type=checkbox]').each(function(checkbox) {
-				checkbox.checked = flag
-			})
-		}
-	<% end %>
+<% javascript_tag do %>
+	function select_all(flag) {
+		$$('input[type=checkbox]').each(function(checkbox) {
+			checkbox.checked = flag
+		})
+	}
 <% end %>

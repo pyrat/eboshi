@@ -47,7 +47,7 @@ class LineItemsController < ApplicationController
 			format.html { redirect_to line_items_path(@client) }
 			format.js do
 				render :update do |page|
-					page.remove "line_item_#{@line_item.id}"
+					page.remove "line_item_#{@line_item.id}_tr"
 				end
 			end
 		end
@@ -65,7 +65,7 @@ class LineItemsController < ApplicationController
   	@line_item.clock_out params[:rate], params[:notes]
   	
   	render :update do |page|
-  		page.replace "line_item_#{@line_item.id}", :partial => 'line_item'
+  		page.replace "line_item_#{@line_item.id}_tr", :partial => 'line_item'
   	end
   end
   
@@ -75,7 +75,7 @@ class LineItemsController < ApplicationController
 		
     render :update do |page|
       params[:invoice][:line_item_ids].each do |id|
-        page.remove "line_item_#{id}"
+        page.remove "line_item_#{id}_tr"
       end	    
 	    page.replace "invoice_#{@invoice.id}", :partial => 'invoice', :object => @invoice
 	    page.call 'restripe'
@@ -88,7 +88,7 @@ class LineItemsController < ApplicationController
 		
     render :update do |page|
 	    ids.each do |id|
-	      page.remove "line_item_#{id}"
+	      page.remove "line_item_#{id}_tr"
 	    end
 	    page.replace "invoice_new", :partial => 'invoice', :object => @client.build_invoice_from_unbilled
     end
