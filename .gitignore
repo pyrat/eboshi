@@ -5,7 +5,7 @@ public/cache/**/*
 doc/api
 doc/app
 doc/spec/*
-db/data.yml
+db/data.*
 db/*.sqlite3
 config/database.yml
 config/deploy.rb
