@@ -1,7 +1,7 @@
 body {
 	margin: 0;
 	padding: 0;
-	background: #000000 url(../images/img01.jpg) repeat-x top center;
+	background: #000000 url(/images/img01.jpg) repeat-x top center;
 	font-size: 13px;
 	color: #8C8C8C;
 }
@@ -60,7 +60,7 @@ a:hover {
 	width: 760px;
 	height: 200px;
 	margin: 0 auto;
-	background: url(../images/img02.jpg) no-repeat right top;
+	background: url(/images/img02.jpg) no-repeat right top;
 }
 
 #header h1, #header p {
@@ -131,7 +131,7 @@ a:hover {
 	color: #646464;
 	padding: 10px 10px;
 	height: 48px;
-	background: url(../images/img06.gif) no-repeat left top;
+	background: url(/images/img06.gif) no-repeat left top;
 }
 
 .meta .more {
@@ -151,15 +151,18 @@ a:hover {
 #sidebar {
 	float: left;
 	width: 230px;
+	margin: 0 0 0 25px;
 }
 
 #sidebar ul {
-	margin: 0;
+	margin: 0 0 0 25px;
 	padding: 0;
-	list-style: none;
+	list-style: hiragana;
 }
 
 #sidebar li {
+	margin: 0;
+	padding: 0;
 }
 
 #sidebar li ul {
@@ -175,7 +178,7 @@ a:hover {
 	margin: 0;
 	padding: 10px 0 0 40px;
 	height: 40px;
-	background: url(../images/img04.gif) no-repeat left 60%;
+	background: url(/images/img04.gif) no-repeat left 60%;
 }
 
 #sidebar a {
@@ -193,7 +196,7 @@ a:hover {
 	height: 40px;
 	margin: 0 auto;
 	padding: 20px 0 0 0;
-	background: url(../images/img05.gif) no-repeat left top;
+	background: url(/images/img05.gif) no-repeat left top;
 	text-align: center;
 	font-size: smaller;
 	color: #52640A;
@@ -201,4 +204,12 @@ a:hover {
 
 #footer a {
 	color: #003300;
+}
+
+/* Line Items */
+
+.select {
+  padding: 2px;
+  font-size: 11px;
+  text-align: center;
 }

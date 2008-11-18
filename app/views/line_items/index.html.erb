@@ -3,7 +3,7 @@
 <% end %>
 
 <!--<%= link_to 'Import from CSV', import_line_items_path %>-->
-
+<!--
 <table border="1" cellpadding="4" cellspacing="0">
   <tr><th colspan="2">TODOS</th></tr>
 	<tr id="new_todos">
@@ -15,10 +15,11 @@
 	<%= render :partial => 'todo', :collection => @client.todos %>
 </table>
 <br />
+-->
 
 <table border="1" cellpadding="4" cellspacing="0">
 	<tr>
-		<td style="padding: 2px; font-size: 11px; text-align: center">
+		<td class="select">
 		  select<br>
 			<a href="javascript:;" onclick="select_all(true)">all</a>
 			<a href="javascript:;" onclick="select_all(false)">none</a>

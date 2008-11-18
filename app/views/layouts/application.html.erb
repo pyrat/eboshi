@@ -27,6 +27,18 @@
 </div>
 <!-- end header -->
 <!-- start page -->
+<div id="sidebar">
+  <h2>clients</h2>
+  <% @clients.each do |client| %>
+    <ul>
+      <li>
+        <%= link_to h(client.name), line_items_path(client) %> - 
+        <%= number_to_currency client.balance %>
+      </li>
+    </ul>
+  <% end %>
+</div>
+
 <div id="page">
 	<!-- start content -->
 	<div id="content">
