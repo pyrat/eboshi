@@ -26,28 +26,28 @@ ActiveRecord::Schema.define(:version => 20080922214952) do
   end
 
   create_table "invoices", :force => true do |t|
-    t.integer  "client_id",    :limit => 11
+    t.integer  "client_id"
     t.datetime "date"
     t.datetime "paid"
     t.string   "project_name"
   end
 
   create_table "line_items", :force => true do |t|
-    t.integer  "client_id",  :limit => 11
-    t.integer  "user_id",    :limit => 11
+    t.integer  "client_id"
+    t.integer  "user_id"
     t.datetime "start"
     t.datetime "finish"
-    t.decimal  "rate",                     :precision => 10, :scale => 2
+    t.decimal  "rate",       :precision => 10, :scale => 2
     t.text     "notes"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "invoice_id", :limit => 11
+    t.integer  "invoice_id"
     t.string   "type"
   end
 
   create_table "todos", :force => true do |t|
-    t.integer  "client_id",  :limit => 11
-    t.integer  "user_id",    :limit => 11
+    t.integer  "client_id"
+    t.integer  "user_id"
     t.text     "notes"
     t.datetime "created_at"
     t.datetime "updated_at"
