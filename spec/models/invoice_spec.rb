@@ -27,6 +27,13 @@ describe Invoice do
   	@invoice.adjustments.length.should == count+1
   	@invoice.adjustments.last.total.should == 50
   end
+  
+  it "should handle the total attribute through mass assignment" do
+    @invoice = Invoice.first
+    total = @invoice.total
+    @invoice.attributes = { :total => total-50 }
+    @invoice.total.should == total-50
+  end
 
   it "should not create an adjustment item when a total is assigned that equals the sum of the line items" do
   	@invoice = Invoice.first

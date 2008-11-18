@@ -6,7 +6,7 @@ class Invoice < ActiveRecord::Base
 	has_many :adjustments
 	
 	validates_presence_of :client, :date, :project_name
-	
+
 	def initialize(options = {})
 		options = {} if options.nil?
 		options.reverse_merge!(:date => Date.today)
@@ -14,12 +14,12 @@ class Invoice < ActiveRecord::Base
 	end
 
 	def total
-		line_items.to_a.sum(&:total)
+		line_items(true).to_a.sum(&:total)
 	end
 	
 	def total=(value)
 		difference = value.to_f - total
-		return total if difference < 0.01
+		return total if difference.abs < 0.01
 		adjustments << Adjustment.new(:client => client, :total => difference)
 	end
 
