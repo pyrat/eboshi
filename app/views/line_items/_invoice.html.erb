@@ -5,7 +5,7 @@
 			  &raquo; <%= link_to_remote 'Clock In', :url => clock_in_path(@client) %> &nbsp;
 			  &raquo; <%= link_to_function 'Create Invoice', "location.href = '#{new_invoice_path(@client)}?'+Form.serializeElements($$('input[type=checkbox]'))" %>
 			</td>
-			<td align="right"><b><%=number_to_currency @client.balance %></b></td>
+			<td align="right"><b><%= number_to_currency invoice.total %></b></td>
 			<td><b>Current Balance</b></td>
 		</tr>
 	<% else %>
@@ -32,6 +32,6 @@
 			</td>
 		</tr>
 	<% end %>
-	
+
 	<%= render :partial => 'line_item', :collection => invoice.line_items.sort %>
 </tbody>

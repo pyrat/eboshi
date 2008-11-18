@@ -32,6 +32,8 @@ describe Invoice do
     @invoice = Invoice.first
     total = @invoice.total
     @invoice.attributes = { :total => total-50 }
+    @invoice.save
+    @invoice = Invoice.first
     @invoice.total.should == total-50
   end
 

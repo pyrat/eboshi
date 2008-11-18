@@ -14,7 +14,7 @@ class Invoice < ActiveRecord::Base
 	end
 
 	def total
-		line_items(true).to_a.sum(&:total)
+		line_items.to_a.sum(&:total)
 	end
 	
 	def total=(value)

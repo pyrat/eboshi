@@ -12,4 +12,4 @@
   %td{ :align => "right" }= in_place_text_field :line_item, :rate, :url => set_line_item_rate_line_item_path(:id => work.id, :client_id => work.client.id) # number_to_currency work.rate, :precision => 0
   %td{ :align => "right" }= number_to_currency work.total
   %td
-    = in_place_text_field :line_item, :notes, :url => set_line_item_notes_line_item_path(:id => work.id, :client_id => work.client.id)
+    = in_place_text_area :line_item, :notes, :url => set_line_item_notes_line_item_path(:id => work.id, :client_id => work.client.id)
