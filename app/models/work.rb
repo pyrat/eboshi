@@ -1,17 +1,18 @@
 class Work < LineItem
+  include Comparable
 	validates_presence_of :user_id, :rate, :start, :finish
 	
 	def self.merge_from_ids(ids)
 	  works = Work.find ids, :order => "finish DESC"
-	  work = works.first
-	  unless works.empty?
-	    work.hours = works.sum(&:hours)
-	    work.notes = works.collect(&:notes) * ' '
-	    works.shift
-	    works.each(&:destroy)
-	    work.save!
-	  end
-	  return work
+	  returning work = works.first do
+	    unless works.empty?
+	      work.hours = works.sum(&:hours)
+	      work.notes = works.collect(&:notes) * ' '
+	      works.shift
+	      works.each(&:destroy)
+	      work.save!
+	    end
+    end
 	end
 	
 	def total
@@ -23,23 +24,16 @@ class Work < LineItem
 	end
 	
 	def clock_out(rate, notes)
-		update_attributes(:finish => Time.now, :notes => notes, :rate => rate)
+		update_attributes :finish => Time.now, :notes => notes, :rate => rate
 	end
 	
 	def <=> target
 		result = (target <=> self.start)
 		target.is_a?(Work) ? result : result*-1
 	end
-	def < (target)
-		result = (target > self.start)
-		target.is_a?(Work) ? !result : result
-	end
-	def > (target)
-		result = (target < self.start)
-		target.is_a?(Work) ? !result : result
-	end
+
 	def incomplete?
-		start == finish
+		start >= finish
 	end
 
 end

@@ -1,9 +1,8 @@
 class TodosController < ApplicationController
-  # POST /todos
   def create
-    @todo = Todo.new(params[:todo])
+    @todo = Todo.new params[:todo]
     @todo.user = current_user
-		@client = Client.find(params[:client_id])
+		@client = Client.find params[:client_id]
     @client.todos << @todo
 
 		render :update do |page|
@@ -11,7 +10,6 @@ class TodosController < ApplicationController
 		end
   end
 
-  # DELETE /todos/1
   def destroy
     @todo = Todo.find(params[:id])
     @todo.destroy

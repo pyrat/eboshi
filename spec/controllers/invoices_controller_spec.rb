@@ -17,6 +17,9 @@ describe InvoicesController do
     it "on show" do
       get :show, :client_id => @client.id, :id => @invoice.id
     end
+    it "on pdf formatted show" do
+      get :show, :client_id => @client.id, :id => @invoice.id, :format => 'pdf'
+    end
     it "on edit" do
       get :edit, :client_id => @client.id, :id => @invoice.id
     end

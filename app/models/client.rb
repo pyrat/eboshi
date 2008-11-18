@@ -8,10 +8,7 @@ class Client < ActiveRecord::Base
 	validates_presence_of :name
 
 	def build_invoice_from_unbilled
-  	invoice = Invoice.new
-  	invoice.client = self
-    invoice.line_items = line_items.unbilled
-    invoice
+  	invoices.build :line_items => line_items.unbilled
 	end
 
 	def invoices_with_unbilled
@@ -35,18 +32,15 @@ class Client < ActiveRecord::Base
 	end
 	
 	def clock_in(user)
-	  now = Time.now
-  	line_item = Work.create(
-  		:start => now,
-  		:finish => now,
-  		:user => user,
-  		:rate => default_rate(user)
-  	)
-  	line_items << line_item
-  	line_item
+	  returning line_item = Work.new do
+	    now = Time.now
+	    line_item.attributes = { :start => now, :finish => now, :user => user, :rate => default_rate(user) }
+    	self.line_items << line_item
+  	end
 	end
 	
 	def default_rate(user)
+	  # look for last rate for this client / agent combo. fallback to default user rate.
 		line_items.find(:first, :conditions => ["type='Work' AND start <> finish AND user_id=? AND rate IS NOT NULL", user.id], :order => "start DESC").try(:rate) || user.rate
 	end
 end

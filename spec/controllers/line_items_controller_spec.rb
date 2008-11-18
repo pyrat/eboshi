@@ -29,13 +29,19 @@ describe LineItemsController do
     it "on create" do
       post :create, :client_id => @client.id, :client => @client.attributes
     end
-    
+
     it "on clock_in" do
       get :clock_in, :client_id => @client.id
     end
 		it "on clock_out" do
 			@line_item = line_items(:incomplete1)
 			get :clock_out, :client_id => @client.id, :id => @line_item.id, :rate => 50
+		end
+    it "on assign" do
+      get :assign, :client_id => @client.id, :invoice_id => invoices(:invoice).id, :invoice => { :line_item_ids => LineItem.all.collect(&:id) }
+    end
+		it "on unassign" do
+			get :unassign, :client_id => @client.id, :invoice => { :line_item_ids => LineItem.all.collect(&:id) }
 		end
 		it "on import" do
 			get :import, :client_id => @client.id

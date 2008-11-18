@@ -20,28 +20,28 @@
 </table>
 <br />
 
-<% form_tag new_invoice_path(@client), :method => :get, :id => 'new_invoice' do %>
-	<table border="1" cellpadding="4" cellspacing="0">
-		<tr>
-			<td style="padding: 2px; font-size: 11px; text-align: center">
-			  select<br>
-				<a href="javascript:;" onclick="select_all(true)">all</a>
-				<a href="javascript:;" onclick="select_all(false)">none</a>
-			</td>
-		  <th>Date</th>
-		  <th>User</th>
-		  <th>Start</th>
-		  <th>Finish</th>
-		  <th>Hours</th>
-		  <th>Rate</th>
-		  <th>Total</th>
-		  <th>Notes</th>
-		</tr>
-		
-  	<%= render :partial => 'invoice', :collection => @invoices %>
-
-	</table>
+<table border="1" cellpadding="4" cellspacing="0">
+	<tr>
+		<td style="padding: 2px; font-size: 11px; text-align: center">
+		  select<br>
+			<a href="javascript:;" onclick="select_all(true)">all</a>
+			<a href="javascript:;" onclick="select_all(false)">none</a>
+		</td>
+	  <th>Date</th>
+	  <th>User</th>
+	  <th>Start</th>
+	  <th>Finish</th>
+	  <th>Hours</th>
+	  <th>Rate</th>
+	  <th>Total</th>
+	  <th>Notes</th>
+	</tr>
 	
+	<%= render :partial => 'invoice', :collection => @invoices %>
+
+</table>
+
+<% form_tag new_invoice_path(@client), :method => :get, :id => 'new_invoice' do %>
 	<% javascript_tag do %>
 		function select_all(flag) {
 			$$('input[type=checkbox]').each(function(checkbox) {

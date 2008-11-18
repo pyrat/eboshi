@@ -1,9 +1,8 @@
 class UsersController < ApplicationController
 	def index
-		@users = User.find(:all)
+		@users = User.all
 	end
 
-  # render new.rhtml
   def new
   end
 

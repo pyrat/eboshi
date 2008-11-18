@@ -22,5 +22,10 @@ class Invoice < ActiveRecord::Base
 		return total if difference < 0.01
 		adjustments << Adjustment.new(:client => client, :total => difference)
 	end
-	
+
+  def attributes=(attrs)
+    # check for nulling checkbox
+    attrs.delete_if { |k,v| k =~ /^paid$|^paid\([1-3]i\)$/ } if attrs['paid'] == "0"
+    super(attrs)
+  end	
 end

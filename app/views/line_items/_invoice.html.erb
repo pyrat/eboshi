@@ -3,7 +3,7 @@
 		<tr id="new_line_items">
 			<td colspan="7">
 			  &raquo; <%= link_to_remote 'Clock In', :url => clock_in_path(@client) %> &nbsp;
-			  &raquo; <%= link_to_function 'Create Invoice', "$('new_invoice').submit()" %>
+			  &raquo; <%= link_to_function 'Create Invoice', "location.href = '#{new_invoice_path(@client)}?'+Form.serializeElements($$('input[type=checkbox]'))" %>
 			</td>
 			<td align="right"><b><%=number_to_currency @client.balance %></b></td>
 			<td><b>Current Balance</b></td>
@@ -11,9 +11,9 @@
 	<% else %>
 		<tr>
 			<td>
-			  <%= link_to_remote 'Assign', :url => assign_line_items_path(@client), :with => "Form.serializeElements( $('new_invoice').getInputs('checkbox') )+'&invoice_id=#{invoice.id}'" %>
-			  <%= link_to_remote 'Unassign', :url => unassign_line_items_path(@client), :with => "Form.serializeElements( $('new_invoice').getInputs('checkbox') )" %>
-			  <%= link_to_remote 'Merge', :url => merge_line_items_path(@client), :with => "Form.serializeElements( $('new_invoice').getInputs('checkbox') )" %>
+			  <%= link_to_remote 'Assign', :url => assign_line_items_path(@client), :with => "Form.serializeElements($$('input[type=checkbox]'))+'&invoice_id=#{invoice.id}'" %>
+			  <%= link_to_remote 'Unassign', :url => unassign_line_items_path(@client), :with => "Form.serializeElements($$('input[type=checkbox]'))" %>
+			  <%= link_to_remote 'Merge', :url => merge_line_items_path(@client), :with => "Form.serializeElements($$('input[type=checkbox]'))" %>
 			</td>
 			<td colspan="6">Invoiced on: <%= invoice.date.to_s(:slash) if invoice.date %></td>
 			<td align="right"><b><%=number_to_currency invoice.total %></b></td>

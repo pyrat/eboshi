@@ -1,5 +1,9 @@
 class InvoiceDrawer
-	include ActionView::Helpers::NumberHelper	
+ 	include ActionView::Helpers::NumberHelper	
+	def self.draw(invoice)
+	  new.draw(invoice)
+	end
+	
 	def draw(invoice)
 		pdf = PDF::Writer.new
 		pdf.select_font("Times-Roman")

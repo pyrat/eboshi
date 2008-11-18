@@ -2,7 +2,10 @@ ActionController::Routing::Routes.draw do |map|
 	map.root :controller => 'clients', :action => 'index'
 
   map.resources :clients do |client|
-	  client.resources :line_items, :collection => [:import, :doimport, :assign, :unassign, :merge], :name_prefix => nil
+	  client.resources :line_items,
+	    :collection => [:import, :doimport, :assign, :unassign, :merge],
+	    :member => [:set_line_item_rate, :set_line_item_notes],
+	    :name_prefix => nil
 	  client.resources :todos, :name_prefix => nil
 	  client.resources :invoices, :name_prefix => nil, :member => [:paid]
 	end

@@ -1,36 +1,27 @@
 class LineItemsController < ApplicationController
 	before_filter :get_client
+	before_filter :get_line_item, :only => [:show, :edit, :update, :destroy, :clock_out]
+
 	in_place_edit_for :line_item, :notes
 	in_place_edit_for :line_item, :rate
 	in_place_edit_for :todo, :notes
 	
-	def get_client
-		@client = Client.find(params[:client_id])
-	end
-	
-  # GET /line_items
   def index
     @invoices = @client.invoices_with_unbilled
   end
 
-  # GET /line_items/1
   def show
-    @line_item = LineItem.find(params[:id])
   end
 
-  # GET /line_items/new
   def new
     @line_item = @client.line_items.new
   end
 
-  # GET /line_items/1/edit
   def edit
-    @line_item = LineItem.find(params[:id])
   end
 
-  # POST /line_items
   def create
-    @line_item = @client.line_items.new(params[:line_item])
+    @line_item = @client.line_items.build params[:line_item]
 		
 		if @line_item.save
 		  flash[:notice] = 'LineItem was successfully created.'
@@ -40,10 +31,8 @@ class LineItemsController < ApplicationController
 		end
   end
 
-  # PUT /line_items/1
   def update
-    @line_item = LineItem.find(params[:id])
-    if @line_item.update_attributes(params[@line_item.class.to_s.underscore])
+    if @line_item.update_attributes params[@line_item.class.to_s.underscore]
       flash[:notice] = 'LineItem was successfully updated.'
       redirect_to line_items_path(@client) 
     else
@@ -51,9 +40,7 @@ class LineItemsController < ApplicationController
     end
   end
 
-  # DELETE /line_items/1
   def destroy
-    @line_item = LineItem.find(params[:id])
     @line_item.destroy
 
 		respond_to do |format|
@@ -67,7 +54,7 @@ class LineItemsController < ApplicationController
   end
   
   def clock_in
-  	@line_item = @client.clock_in(current_user)
+  	@line_item = @client.clock_in current_user
   	
   	render :update do |page|
   		page.insert_html :after, 'new_line_items', :partial => 'line_item'
@@ -75,8 +62,7 @@ class LineItemsController < ApplicationController
   end
   
   def clock_out
-  	@line_item = LineItem.find(params[:id])
-  	@line_item.clock_out(params[:rate], params[:notes])
+  	@line_item.clock_out params[:rate], params[:notes]
   	
   	render :update do |page|
   		page.replace "line_item_#{@line_item.id}", :partial => 'line_item'
@@ -85,8 +71,7 @@ class LineItemsController < ApplicationController
   
 	def assign
 	  @invoice = Invoice.find params[:invoice_id]
-	  @invoice.line_item_ids = (@invoice.line_item_ids + params[:invoice][:line_item_ids]).uniq
-		@invoice.save!
+	  @invoice.line_item_ids += params[:invoice][:line_item_ids]
 		
     render :update do |page|
       params[:invoice][:line_item_ids].each do |id|
@@ -97,6 +82,18 @@ class LineItemsController < ApplicationController
     end
 	end
 	
+  def unassign
+    ids = params[:invoice][:line_item_ids]
+    LineItem.update_all "invoice_id = NULL", :id => ids
+		
+    render :update do |page|
+	    ids.each do |id|
+	      page.remove "line_item_#{id}"
+	    end
+	    page.replace "invoice_new", :partial => 'invoice', :object => @client.build_invoice_from_unbilled
+    end
+  end
+  
 	def merge
 	  work = Work.merge_from_ids params[:invoice][:line_item_ids]
 	  @invoice = work.invoice || @client.build_invoice_from_unbilled
@@ -105,18 +102,6 @@ class LineItemsController < ApplicationController
 	  end
 	end
 
-  def unassign
-	  params[:invoice][:line_item_ids].each do |id|
-	    li = LineItem.find(id)
-	    li.invoice = nil
-	    li.save
-	  end
-		
-    render :update do |page|
-	    page.remove params[:invoice][:line_item_ids].collect {|id| "line_item_#{id}"}
-    end
-  end
-  
   def import
   end
   
@@ -162,4 +147,14 @@ class LineItemsController < ApplicationController
 		end
 		redirect_to line_items_path(@client)
   end
+  
+  protected
+    def get_line_item
+      @line_item = LineItem.find params[:id]
+    end
+
+  	def get_client
+		  @client = Client.find(params[:client_id])
+	  end
+
 end

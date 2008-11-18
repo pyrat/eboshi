@@ -1,4 +1,5 @@
 class Adjustment < LineItem
+  include Comparable
 	validates_presence_of :rate
 	
 	def total
@@ -11,11 +12,5 @@ class Adjustment < LineItem
 	
 	def <=> (target)
 		1
-	end
-	def < (target)
-		false
-	end
-	def > (target)
-		true
 	end
 end
