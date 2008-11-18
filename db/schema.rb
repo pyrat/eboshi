@@ -46,8 +46,8 @@ ActiveRecord::Schema.define(:version => 20080922214952) do
   end
 
   create_table "todos", :force => true do |t|
-    t.integer  "client_id"
-    t.integer  "user_id"
+    t.integer  "client_id",  :limit => 8
+    t.integer  "user_id",    :limit => 8
     t.text     "notes"
     t.datetime "created_at"
     t.datetime "updated_at"
