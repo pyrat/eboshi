@@ -1,0 +1,49 @@
+= error_messages_for :client
+- form_for(@client) do |f|
+
+  %p
+    %b Name
+    %br
+    = f.text_field :name
+
+  %p
+    %b Address
+    %br
+    = f.text_field :address
+
+  %p
+    %b City
+    %br
+    = f.text_field :city
+
+  %p
+    %b State
+    %br
+    = f.text_field :state
+
+  %p
+    %b Zip
+    %br
+    = f.text_field :zip
+
+  %p
+    %b Country
+    %br
+    = f.text_field :country
+
+  %p
+    %b Email
+    %br
+    = f.text_field :email
+
+  %p
+    %b Contact
+    %br
+    = f.text_field :contact
+
+  %p
+    %b Phone
+    %br
+    = f.text_field :phone
+    
+  %p= f.submit @client.new_record? ? "Create" : "Update"

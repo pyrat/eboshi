@@ -1,0 +1,37 @@
+= error_messages_for :invoice
+
+- form_for @invoice, :url => invoice_path(@client, @invoice) do |f|
+  %table
+    - @invoice.line_items.each do |line_item|
+      %tr
+        %td= check_box_tag 'invoice[line_item_ids][]', line_item.id, true
+        %td= line_item.start.to_s(:slash) if line_item.start
+        %td= h line_item.try(:user).try(:name)
+        %td= line_item.start.to_s(:time) if line_item.start
+        %td= line_item.finish.to_s(:time) if line_item.finish
+        %td= number_with_precision line_item.hours, 2
+        %td= number_to_currency(line_item.rate, :precision => 0)
+        %td= number_to_currency line_item.total
+        %td= h line_item.notes
+  %p
+    %b Date
+    %br
+    = f.date_select :date
+    
+  %p
+    %b Paid
+    %br
+    = f.check_box :paid
+    = f.date_select :paid
+    
+  %p
+    %b Project
+    %br
+    = f.text_field :project_name
+    
+  %p
+    %b Total
+    %br
+    = f.text_field :total
+
+  %p= f.submit @invoice.new_record? ? "Create" : "Update"	

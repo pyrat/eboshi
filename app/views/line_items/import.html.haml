@@ -1,0 +1,14 @@
+- content_for :title do
+  = @client.name
+  \&raquo; Import from CSV
+
+- form_tag doimport_line_items_path(@client), { :multipart => true } do
+  %b CSV File
+  = file_field_tag :csv
+  %br
+  
+  = check_box_tag :clear, 1
+  Replace?
+  %br
+  
+  = submit_tag 'Import'

@@ -1,0 +1,16 @@
+= error_messages_for :user
+
+- form_for(@user) do |f|
+
+  %p
+    %b Name
+    %br
+    = f.text_field :login
+    
+  %p
+    %b Default Rate/Hour
+    %br
+    $
+    = f.text_field :rate
+    
+  %p= f.submit @user.new_record? ? "Create" : "Update"

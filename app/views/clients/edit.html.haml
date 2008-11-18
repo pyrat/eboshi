@@ -1,0 +1,6 @@
+- content_for :title do
+  Editing client
+
+= render :partial => 'form', :object => @client
+
+= link_to 'Back', clients_path

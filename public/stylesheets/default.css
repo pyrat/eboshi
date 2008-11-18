@@ -54,6 +54,19 @@ a:hover {
 
 #wrapper {
 }
+
+#flash_notice {
+  color: green;
+}
+
+#flash_error {
+  color: red;
+}
+
+.red {
+  color: red;
+}
+
 /* Header */
 
 #header {
@@ -106,7 +119,6 @@ a:hover {
 /* Content */
 
 #content {
-	float: right;
 	width: 700px;
 	margin: 0;
 }

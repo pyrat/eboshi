@@ -1,11 +1,7 @@
 class InvoicesController < ApplicationController
 	before_filter :get_client
-	before_filter :get_invoice, :except => [:index, :new, :create]
+	before_filter :get_invoice, :except => [:new, :create]
 	
-	def index
-	  @invoices = @client.invoices
-	end
-
 	def show
 		respond_to do |format|
 			format.html 

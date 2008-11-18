@@ -13,3 +13,10 @@ function restripe() {
     i.style.backgroundColor = colors[index % 2]
   })
 }
+
+function select_all(flag) {
+	$$('input[type=checkbox]').each(function(checkbox) {
+		checkbox.checked = flag
+	})
+}
+

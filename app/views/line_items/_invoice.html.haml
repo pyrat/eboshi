@@ -1,0 +1,38 @@
+%tbody{ :style => "background-color: #{cycle 'white', '#CCCCCC'}", :id => "invoice_#{invoice.id_or_new}" }
+  - if invoice.new_record?
+    %tr#new_line_items
+      %td{ :colspan => 7 }
+        &raquo; 
+        = link_to_remote 'Clock In', :url => clock_in_path(@client)
+        &nbsp;
+        &raquo;
+        = link_to_function 'Create Invoice', "location.href = '#{new_invoice_path(@client)}?'+Form.serializeElements($$('input[type=checkbox]'))"
+      %td{ :align => "right" }
+        %b= number_to_currency invoice.total
+      %td
+        %b Current Balance
+  - else
+    %tr
+      %td
+        = link_to_remote 'Assign', :url => assign_line_items_path(@client), :with => "Form.serializeElements($$('input[type=checkbox]'))+'&invoice_id=#{invoice.id}'"
+        = link_to_remote 'Unassign', :url => unassign_line_items_path(@client), :with => "Form.serializeElements($$('input[type=checkbox]'))"
+        = link_to_remote 'Merge', :url => merge_line_items_path(@client), :with => "Form.serializeElements($$('input[type=checkbox]'))"
+      %td{ :colspan => 6 }
+        Invoiced on:
+        = invoice.date.to_s(:slash) if invoice.date
+      %td{ :align => "right" }
+        %b= number_to_currency invoice.total
+      %td
+        - if invoice.paid
+          %b PAID
+          on:
+          = invoice.paid.to_s(:slash)
+        - else
+          %b.red UNPAID
+          = link_to 'Mark as Paid', paid_invoice_path(@client, invoice)
+      %td{ :colspan => 2 }
+        = link_to 'Export PDF', formatted_invoice_path(@client, invoice, :pdf)
+        = link_to 'Edit', edit_invoice_path(@client, invoice)
+        = link_to 'Delete', invoice_path(@client, invoice), :method => :delete, :confirm => 'Are you certain you want to delete this invoice and its hours and notes?'
+
+  = render :partial => 'line_item', :collection => invoice.line_items.sort

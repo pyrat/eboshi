@@ -1,6 +1,0 @@
-<tr id="line_item_<%= line_item.id %>_tr">
-	<td><%= check_box_tag 'invoice[line_item_ids][]', line_item.id, line_item.checked?, :id => "line_item_#{line_item.id}" %></td>
-	<%= render :partial => line_item.class.to_s.underscore, :object => line_item %>
-	<td><%= link_to 'Edit', edit_line_item_path(@client, line_item) %></td>
-	<td><%= link_to_remote 'Destroy', :url => line_item_path(@client, line_item), :confirm => 'Are you sure?', :method => :delete %></td>
-</tr>

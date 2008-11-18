@@ -1,0 +1,9 @@
+- content_for :title do
+  Editing invoice
+
+= render :partial => 'form'
+
+= link_to 'Show', invoice_path(@client, @invoice)
+|
+= link_to 'Back', invoices_path(@client)
+

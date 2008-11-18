@@ -1,0 +1,49 @@
+%div{ :style => "float: right" }
+  625 NW Everett Street
+  Portland, OR  97209
+  
+%p
+  attention:
+  %br
+  = h @invoice.client.contact
+  %br
+  = h @invoice.client.address
+  %br
+  = h @invoice.client.city
+  ,
+  = h @invoice.client.state
+  = h @invoice.client.zip
+  
+%h2= @invoice.date.to_s
+  
+%table
+  %tr
+    %th Project
+    %td= h @invoice.project_name
+  %tr
+    %th Invoice #
+    %td= @invoice.id
+  %tr
+    %th Terms
+    %td Due on Receipt
+    
+%table
+  %tr
+    %th Item
+    %th Hours
+    %th Rate
+    %th Cost
+  - for line_item in @invoice.line_items
+    %tr
+      %td= h line_item.notes
+      %td= line_item.hours
+      %td= number_to_currency line_item.rate
+      %td= number_to_currency line_item.total
+  %tr
+    %th Total
+    %td{ :colspan => "2" }/
+    %th= number_to_currency @invoice.total
+    
+= link_to 'Edit', edit_invoice_path(@client, @invoice)
+|
+= link_to 'Back', invoices_path(@client)
