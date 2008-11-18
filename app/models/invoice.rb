@@ -27,5 +27,5 @@ class Invoice < ActiveRecord::Base
     # check for nulling checkbox
     attrs.delete_if { |k,v| k =~ /^paid$|^paid\([1-3]i\)$/ } if attrs['paid'] == "0"
     super(attrs)
-  end	
+  end
 end

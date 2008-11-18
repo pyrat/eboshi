@@ -1,5 +1,4 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -7,22 +6,24 @@
   <meta name="keywords" content="" />
   <meta name="description" content="" />
   <%= javascript_include_tag :defaults %>
+  <%= yield :javascript_includes %>
+  <%= yield :stylesheet_links %>
   <%= stylesheet_link_tag 'default'%>
-
   <!-- Favicon -->
-<link rel="shortcut icon" href="/favicon.png" type="image/x-icon" />
-
+  <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" />
 </head>
 <body>
 <div id="wrapper">
 <!-- start header -->
 <div id="header">
-	<h1>BOTandROSE Invoicing</h1>
+  <div id="login">
+	  Welcome, <%= current_user.name %>!<br>
+	  [<%= link_to 'my account', edit_user_path(current_user) %>]
+  </div>
+	<h1><a href="/">BOTandROSE Invoicing</a></h1>
 	<p>Simple rails invoicing application</p>
-</div>
-<div style="float: right">
-	Welcome, <%= current_user.name %>!<br>
-	[<%= link_to 'my account', edit_user_path(current_user) %>]
+	<h2><%= yield :title %></h2>
+	<%= yield :header %>
 </div>
 <!-- end header -->
 <!-- start page -->
@@ -31,7 +32,7 @@
 	<div id="content">
 	  <p style="color: green"><%= flash[:notice] %></p>
 	  <p style="color: red"><%= flash[:error] %></p>
-    	<%= yield  %>
+    	<%= yield %>
 	</div>
 	<!-- end content -->
 	
@@ -39,7 +40,7 @@
 </div>
 <!-- end page -->
 <div id="footer">
-	<p>Welcome to the footer.</p>
+	<%= yield :footer %>
 </div>
 </body>
 </html>

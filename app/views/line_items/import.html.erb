@@ -1,4 +1,6 @@
-<h1><%= @client.name %> &raquo; <%= @client.name %> &raquo; Import from CSV</h1>
+<% content_for :title do %>
+  <%= @client.name %> &raquo; <%= @client.name %> &raquo; Import from CSV
+<% end %>
 
 <% form_tag doimport_line_items_path(@client), { :multipart => true } do %>
 	<b>CSV File</b> <%= file_field_tag :csv %><br>
