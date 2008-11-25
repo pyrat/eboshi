@@ -3,6 +3,10 @@ class InvoicesController < ApplicationController
 	before_filter :get_client
 	
 	def index
+	  respond_to do |format|
+	    format.html
+	    format.js { render :partial => 'invoice', :collection => @client.invoices.paid }
+	  end
 	end
 	
 	def show
@@ -22,6 +26,10 @@ class InvoicesController < ApplicationController
 	end
 
 	def edit
+	  respond_to do |format|
+	    format.html
+	    format.js { render :partial => 'full', :locals => { :invoice => @invoice } } 
+	  end
 	end
 
 	def create
