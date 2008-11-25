@@ -1,0 +1,42 @@
+%table{ :border => "1", :cellpadding => "4", :cellspacing => "0" }
+  %tr
+    %th Date
+    %th User
+    %th Start
+    %th Finish
+    %th Hours
+    %th Rate
+    %th Total
+    %th Notes
+  
+  %tbody{ :class => invoice.status, :id => "invoice_#{invoice.id_or_new}" }
+    - if invoice.status == 'unbilled'
+      %tr#new_line_items
+        %td{ :colspan => 6 }
+          = button_to 'Clock In', clock_in_path(@client), :id => 'clock_in'
+          &nbsp;
+          &raquo;
+          = link_to 'Create Invoice', new_invoice_path(@client)
+        %td.total= number_to_currency invoice.total
+        %td
+          %b Current Balance
+    - else
+      %tr
+        %td{ :colspan => 6 }
+          Invoiced on:
+          = invoice.date.to_s(:slash) if invoice.date
+        %td.total= number_to_currency invoice.total
+        %td
+          - if invoice.paid
+            %b PAID
+            on:
+            = invoice.paid.to_s(:slash)
+          - else
+            %b.red UNPAID
+            = button_to 'Mark as Paid', paid_invoice_path(invoice)
+        %td{ :colspan => 2 }
+          = link_to 'Export PDF', invoice_path(invoice, :format => :pdf)
+          = link_to 'Edit', edit_invoice_path(invoice)
+          = link_to 'Delete', invoice_path(invoice), :method => :delete, :confirm => 'Are you certain you want to delete this invoice and its hours and notes?'
+
+    = render :partial => 'line_items/line_item', :collection => invoice.line_items.sort

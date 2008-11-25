@@ -1,0 +1,13 @@
+- content_for :title do
+  = @client.name
+  &raquo; Billing Details
+
+- content_for :javascript_includes do
+  = javascript_include_tag 'line_items'
+
+= render :partial => 'invoice', :object => @client.build_invoice_from_unbilled
+
+= render :partial => 'invoice', :collection => @client.invoices.unpaid
+
+= link_to "paid invoices (#{@client.invoices.paid.count})", invoices_path(:client_id => @client.id, :show_paid => params[:show_paid] ? nil : 1), :id => "show_paid_invoices"
+= render(:partial => 'invoice', :collection => @client.invoices.paid) if params[:show_paid]

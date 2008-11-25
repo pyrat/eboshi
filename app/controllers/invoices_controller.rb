@@ -1,18 +1,24 @@
 class InvoicesController < ApplicationController
+	before_filter :get_invoice, :except => [:index, :new, :create]
 	before_filter :get_client
-	before_filter :get_invoice, :except => [:new, :create]
+	
+	def index
+	end
 	
 	def show
 		respond_to do |format|
 			format.html 
 			format.pdf do
-				send_data InvoiceDrawer.draw(@invoice), :filename => 'invoice.pdf', :type => 'application/pdf', :disposition => 'inline'
+				send_data InvoiceDrawer.draw(@invoice),
+				  :filename => 'invoice.pdf',
+				  :type => 'application/pdf',
+				  :disposition => 'inline'
 			end
 	  end
 	end
 
 	def new
-		@invoice = @client.invoices.new params[:invoice]
+		@invoice = @client.build_invoice_from_unbilled 
 	end
 
 	def edit
@@ -22,7 +28,7 @@ class InvoicesController < ApplicationController
 	  @invoice = @client.invoices.new params[:invoice]
 	  if @invoice.save
 	    flash[:notice] = 'Invoice was successfully created.'
-	    redirect_to line_items_path(@client)
+	    redirect_to invoices_path(@client)
 	  else
 	    render :action => "new"
 	  end
@@ -32,7 +38,7 @@ class InvoicesController < ApplicationController
 	  @invoice.attributes = params[:invoice]
 	  if @invoice.save
 	    flash[:notice] = 'Invoice was successfully updated.'
-	    redirect_to line_items_path(@client)
+	    redirect_to invoices_path(@client)
 	  else
 	    render :action => "edit" 
 	  end
@@ -42,13 +48,13 @@ class InvoicesController < ApplicationController
 	  @invoice.destroy
 	  flash[:notice] = 'Invoice was successfully deleted.'
 
-	  redirect_to line_items_path(@client)
+	  redirect_to invoices_path(@client)
 	end
 	
 	def paid
 	  if @invoice.update_attribute :paid, Date.today
 	    flash[:notice] = 'Invoice was successfully updated.'
-	    redirect_to line_items_path(@client)
+	    redirect_to invoices_path(@client)
 	  else
 	    render :action => "edit" 
 	  end
@@ -56,7 +62,7 @@ class InvoicesController < ApplicationController
 	
 	protected 
 		def get_client
-			@client = Client.find params[:client_id]
+			@client = @invoice.try(:client) || Client.find(params[:client_id])
 		end
 
 		def get_invoice

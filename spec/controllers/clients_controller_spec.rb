@@ -13,9 +13,6 @@ describe ClientsController do
     it "on index" do
       get :index
     end
-    it "on show" do
-      get :show, :id => @client.id
-    end
     it "on edit" do
       get :edit, :id => @client.id
     end

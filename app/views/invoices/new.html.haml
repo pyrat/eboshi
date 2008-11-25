@@ -1,6 +1,9 @@
 - content_for :title do
   New invoice
 
-= render :partial => 'form', :object => @invoice
+= error_messages_for :invoice
+
+- form_for @invoice do |f|
+  = render :partial => 'form', :object => f
 
 = link_to 'Cancel', line_items_path(@client)

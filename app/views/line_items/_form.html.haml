@@ -1,0 +1,21 @@
+- f = form
+%p
+  %b User
+  %br
+  = f.select :user_id, User.to_select
+%p
+  %b Start
+  %br 
+  = f.datetime_select :start
+%p
+  %b End
+  %br
+  = f.datetime_select :finish
+%p
+  %b Rate
+  %br
+  = f.text_field :rate
+%p
+  %b Notes
+  %br
+  = f.text_area :notes

@@ -2,14 +2,13 @@
 %td= work.start.to_s(:slash)
 %td=h work.user.login
 %td= work.start.to_s(:time)
+
 - if work.incomplete?
-  %td{ :colspan => 2 }= link_to_remote 'Clock Out', :url => clock_out_path(@client, work), :with => "'notes='+escape($('notes_#{work.id}').value)+'&rate='+escape($('rate_#{work.id}').value)"
-  %td{ :colspan => 2 }= text_field_tag "rate_#{work.id}", work.rate, :style => "width: 60px"
-  %td= text_field_tag "notes_#{work.id}", work.notes, :size => 50
+  %td{ :colspan => 2 }= link_to 'Clock Out', clock_out_path(@client, work), :class => "clock_out"
 - else
   %td= work.finish.to_s(:time)
-  %td= number_with_precision work.hours, 2
-  %td{ :align => "right" }= in_place_text_field :line_item, :rate, :url => set_line_item_rate_line_item_path(:id => work.id, :client_id => work.client.id) # number_to_currency work.rate, :precision => 0
-  %td{ :align => "right" }= number_to_currency work.total
-  %td
-    = in_place_text_area :line_item, :notes, :url => set_line_item_notes_line_item_path(:id => work.id, :client_id => work.client.id)
+  %td= number_with_precision work.hours, :precision => 2
+  
+%td{ :align => "right" }= in_place_text_field :line_item, :rate, :url => set_line_item_rate_line_item_path(:id => work.id, :client_id => work.client.id)
+%td{ :align => "right" }= number_to_currency work.total
+%td= in_place_text_area :line_item, :notes, :url => set_line_item_notes_line_item_path(:id => work.id, :client_id => work.client.id)

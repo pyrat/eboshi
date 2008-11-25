@@ -1,5 +1,4 @@
 %tr{ :id => "line_item_#{line_item.id}_tr" }
-  %td= check_box_tag 'invoice[line_item_ids][]', line_item.id, line_item.checked?, :id => "line_item_#{line_item.id}"
-  = render :partial => line_item.class.to_s.underscore, :object => line_item
+  = render :partial => 'line_items/'+line_item.class.to_s.underscore, :object => line_item
   %td= link_to 'Edit', edit_line_item_path(@client, line_item)
-  %td= link_to_remote 'Destroy', :url => line_item_path(@client, line_item), :confirm => 'Are you sure?', :method => :delete
+  %td= button_to 'Destroy', line_item_path(@client, line_item), :confirm => 'Are you sure?', :method => :delete, :class => 'delete'

@@ -15,28 +15,28 @@ describe InvoicesController do
       get :index, :client_id => @client.id
     end
     it "on show" do
-      get :show, :client_id => @client.id, :id => @invoice.id
+      get :show, :id => @invoice.id
     end
     it "on pdf formatted show" do
-      get :show, :client_id => @client.id, :id => @invoice.id, :format => 'pdf'
+      get :show, :id => @invoice.id, :format => 'pdf'
     end
     it "on edit" do
-      get :edit, :client_id => @client.id, :id => @invoice.id
+      get :edit, :id => @invoice.id
     end
     it "on new" do
       get :new, :client_id => @client.id
     end
     it "on update" do
-      put :update, :client_id => @client.id, :id => @invoice.id, :invoice => @invoice.attributes
+      put :update, :id => @invoice.id, :invoice => @invoice.attributes
     end
     it "on destroy" do
-      delete :destroy, :client_id => @client.id, :id => @invoice.id
+      delete :destroy, :id => @invoice.id
     end
     it "on create" do
       post :create, :client_id => @client.id, :invoice => @invoice.attributes
     end
     it "on paid" do
-      post :paid, :client_id => @client.id, :id => @invoice.id
+      post :paid, :id => @invoice.id
     end
   	
   end

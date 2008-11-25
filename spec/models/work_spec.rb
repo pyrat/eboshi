@@ -77,7 +77,7 @@ describe Work do
 		end
 					
 		it "should clock out correctly" do
-			@line_item.clock_out(50, 'testing unbilled')
+			@line_item.clock_out
 		end
 	end
 

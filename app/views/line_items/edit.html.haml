@@ -4,26 +4,7 @@
 = error_messages_for :line_item
 
 - form_for @line_item, :url => line_item_path(@client, @line_item) do |f|
-  %p
-    %b User
-    %br
-    = f.select :user_id, User.to_select
-  %p
-    %b Start
-    %br 
-    = f.datetime_select :start
-  %p
-    %b End
-    %br
-    = f.datetime_select :finish
-  %p
-    %b Rate
-    %br
-    = f.text_field :rate
-  %p
-    %b Notes
-    %br
-    = f.text_area :notes
+  = render :partial => 'form', :object => f, :as => :f
   %p= f.submit "Update"
 
 = link_to 'Back', line_items_path(@client)

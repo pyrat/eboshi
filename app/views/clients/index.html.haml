@@ -9,7 +9,7 @@
     %tr
       %td= h client.name
       %td= number_to_currency client.balance
-      %td= link_to 'Billing Details', line_items_path(client)
+      %td= link_to 'Billing Details', invoices_path(client)
       %td= link_to 'Client Details', client
       %td= link_to 'Edit', edit_client_path(client)
       %td= link_to 'Destroy', client, :confirm => 'Are you sure?', :method => :delete

@@ -51,5 +51,9 @@ describe Invoice do
     @invoice = Invoice.new 
     @invoice.attributes = { "paid(1i)" => "2008", "paid(2i)" => "10", "paid(3i)" => "1", "paid" => "1" }
     @invoice.paid.to_s(:slash).should == "10/01/08"
+    
+    @invoice = invoices(:invoice)
+    @invoice = Invoice.new "paid(1i)" => "2008", "paid(2i)" => "10", "paid(3i)" => "1", "paid" => "0"
+    @invoice.paid.should be_nil
   end
 end

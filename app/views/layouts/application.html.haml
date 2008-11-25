@@ -11,7 +11,7 @@
   = javascript_include_tag :defaults
   = yield :javascript_includes
 
-  = stylesheet_link_tag 'default'
+  = stylesheet_link_tag 'default', 'in_place_styles'
   = yield :stylesheet_links
 
   %link{:rel => "shortcut icon", :href => "/favicon.png", :type => "image/x-icon"}
@@ -33,7 +33,7 @@
       - @clients.each do |client|
         %ul
           %li
-            = link_to h(client.name), line_items_path(client)
+            = link_to h(client.name), invoices_path(client)
             \- 
             = number_to_currency client.balance
   

@@ -1,13 +1,13 @@
 ActionController::Routing::Routes.draw do |map|
 	map.root :controller => 'clients', :action => 'index'
 
-  map.resources :clients do |client|
-	  client.resources :line_items,
-	    :collection => [:import, :doimport, :assign, :unassign, :merge],
-	    :member => [:set_line_item_rate, :set_line_item_notes],
-	    :name_prefix => nil
-	  client.resources :todos, :name_prefix => nil
-	  client.resources :invoices, :name_prefix => nil, :member => [:paid]
+  map.resources :clients, :shallow => true do |client|
+	  client.resources :invoices, :member => [:paid], :name_prefix => nil
+    client.resources :line_items,
+      :except => [:index, :show],
+      :member => [:set_line_item_rate, :set_line_item_notes],
+      :name_prefix => nil
+	  client.resources :todos, :only => [:create, :destroy], :name_prefix => nil
 	end
 	
 	map.clock_in '/clients/:client_id/clock_in', :controller => 'line_items', :action => 'clock_in'

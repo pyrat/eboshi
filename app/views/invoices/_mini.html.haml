@@ -1,0 +1,12 @@
+%div{ :class => "#{invoice.status} invoice", :id => "invoice_#{invoice.id_or_new}" }
+  %h2
+    = "Invoice \##{invoice.number} - "
+    = invoice.date.to_s(:slash)+": "
+    = number_to_currency(invoice.total)
+    = invoice.paid ? 'paid' : 'unpaid'
+  %ul
+    %li= button_to 'Export PDF', invoice_path(invoice, :format => :pdf)
+    - unless invoice.paid
+      %li= button_to('Mark as Paid', paid_invoice_path(invoice)) 
+    %li= link_to 'show details', edit_invoice_path(invoice)
+  .clear

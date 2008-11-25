@@ -23,8 +23,8 @@ class Work < LineItem
 	  update_attribute :finish, start + total.hours
 	end
 	
-	def clock_out(rate, notes)
-		update_attributes :finish => Time.now, :notes => notes, :rate => rate
+	def clock_out
+		update_attributes :finish => Time.now
 	end
 	
 	def <=> target

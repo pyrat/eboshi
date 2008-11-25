@@ -5,6 +5,9 @@ class Invoice < ActiveRecord::Base
 	has_many :works
 	has_many :adjustments
 	
+	named_scope :unpaid, :conditions => "paid = '0000-00-00 00:00:00' OR paid IS NULL"
+	named_scope :paid, :conditions => "paid > 0"
+	
 	validates_presence_of :client, :date, :project_name
 
 	def initialize(options = {})
@@ -25,7 +28,16 @@ class Invoice < ActiveRecord::Base
 
   def attributes=(attrs)
     # check for nulling checkbox
-    attrs.delete_if { |k,v| k =~ /^paid$|^paid\([1-3]i\)$/ } if attrs['paid'] == "0"
+    attrs.delete_if { |k,v| k =~ /^paid\([1-3]i\)$/ } if attrs['paid'] == "0"
     super(attrs)
+  end
+  
+  def status
+    return 'unbilled' if new_record?
+    return paid ? 'paid' : 'unpaid'
+  end
+  
+  def number
+    client.invoices.count(:conditions => ['date < ?', date]) + 1
   end
 end

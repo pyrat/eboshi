@@ -11,9 +11,6 @@ describe LineItemsController do
 	end
 
   describe "should not error out" do
-    it "on index" do
-      get :index, :client_id => @client.id
-    end
     it "on edit" do
       get :edit, :client_id => @client.id, :id => @line_item.id
     end
@@ -35,23 +32,8 @@ describe LineItemsController do
     end
 		it "on clock_out" do
 			@line_item = line_items(:incomplete1)
-			get :clock_out, :client_id => @client.id, :id => @line_item.id, :rate => 50
+			get :clock_out, :client_id => @client.id, :id => @line_item.id
 		end
-    it "on assign" do
-      get :assign, :client_id => @client.id, :invoice_id => invoices(:invoice).id, :invoice => { :line_item_ids => LineItem.all.collect(&:id) }
-    end
-		it "on unassign" do
-			get :unassign, :client_id => @client.id, :invoice => { :line_item_ids => LineItem.all.collect(&:id) }
-		end
-		it "on import" do
-			get :import, :client_id => @client.id
-		end
-  	it "on doimport" do
-  		post :import, :client_id => @client.id
-  	end
-  	it "on merge" do
-  		post :merge, :client_id => @client.id, :invoice => { :line_item_ids => [line_items(:billed1).id, line_items(:billed2).id] }
-  	end
   	
   end
 end

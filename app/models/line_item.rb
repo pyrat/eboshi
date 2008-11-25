@@ -30,4 +30,8 @@ class LineItem < ActiveRecord::Base
 			user_id = user.try(:id)
 		end
 	end
+	
+	def invoice_total
+	  invoice.try(:total) || client.balance
+	end
 end
