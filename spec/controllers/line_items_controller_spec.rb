@@ -34,6 +34,8 @@ describe LineItemsController do
 			@line_item = line_items(:incomplete1)
 			get :clock_out, :client_id => @client.id, :id => @line_item.id
 		end
-  	
+    it "on merge" do
+      get :merge, :client_id => @client.id, :line_item_ids => @client.works.collect(&:id)
+    end  	
   end
 end

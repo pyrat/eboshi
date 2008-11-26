@@ -6,6 +6,7 @@ ActionController::Routing::Routes.draw do |map|
     client.resources :line_items,
       :except => [:index, :show],
       :member => [:set_line_item_rate, :set_line_item_notes],
+      :collection => [:merge],
       :name_prefix => nil
 	  client.resources :todos, :only => [:create, :destroy], :name_prefix => nil
 	end

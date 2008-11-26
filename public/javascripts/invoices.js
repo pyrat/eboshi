@@ -37,6 +37,19 @@ document.observe('dom:loaded', function() {
     })
   })
   
+  $$('a.merge').each(function(a) {
+    a.observe('click', function(e) {
+      e.stop()
+      var checkboxes = $$('input:checked')
+      var first = checkboxes.first()
+      var others = checkboxes.reject(function(cb) { return cb.value == first.value })
+      new Ajax.Request(a.href+'?'+Form.serializeElements(checkboxes), { onComplete: function(response) {
+        first.up('tr').replace(response.responseText)
+        others.each(function(cb) { cb.up('tr').remove() })
+      }})
+    })
+  })
+  
   $('show_paid_invoices').observe('click', function(e) {
     e.stop()
     var el = $('paid_invoices')

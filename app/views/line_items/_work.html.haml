@@ -1,5 +1,7 @@
 - @line_item = work
-%td= work.start.to_s(:slash)
+%td
+  = check_box_tag 'line_item_ids[]', work.id
+  = work.start.to_s(:slash)
 %td=h work.user.login
 %td= work.start.to_s(:time)
 

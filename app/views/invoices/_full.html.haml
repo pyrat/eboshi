@@ -17,6 +17,9 @@
           &nbsp;
           &raquo;
           = link_to 'Create Invoice', new_invoice_path(@client)
+          &nbsp;
+          &raquo;
+          = link_to 'Merge', merge_line_items_path(@client), :class => 'merge'
         %td.total= number_to_currency invoice.total
         %td
           %b Current Balance
@@ -35,8 +38,16 @@
             %b.red UNPAID
             = button_to 'Mark as Paid', paid_invoice_path(invoice)
         %td{ :colspan => 2 }
+          &raquo;
           = link_to 'Export PDF', invoice_path(:id => invoice.id, :format => :pdf)
+          %br
+          &raquo;
+          = link_to 'Merge', merge_line_items_path(@client), :class => 'merge'
+          %br
+          &raquo;
           = link_to 'Edit', edit_invoice_path(invoice)
+          %br
+          &raquo;
           = link_to 'Delete', invoice_path(invoice), :method => :delete, :confirm => 'Are you certain you want to delete this invoice and its hours and notes?'
 
     = render :partial => 'line_items/line_item', :collection => invoice.line_items.sort

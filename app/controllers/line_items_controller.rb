@@ -65,6 +65,15 @@ class LineItemsController < ApplicationController
   	end
   end
   
+  def merge
+    work = Work.merge_from_ids params[:line_item_ids]
+    @invoice = work.invoice || @client.build_invoice_from_unbilled
+    respond_to do |format|
+      format.html { redirect_to invoices_path(@client) }
+      format.js { render :partial => 'line_item', :locals => { :line_item => work } }
+    end
+  end
+
   protected
     def get_line_item
       @line_item = LineItem.find params[:id]
