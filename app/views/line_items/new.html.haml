@@ -2,7 +2,7 @@
   New line_item
 
 = error_messages_for :line_item
-- form_for(@line_item, :url => line_items_path(@client)) do |f|
+- form_for @line_item, :url => line_items_path(@client) do |f|
   = render :partial => 'form', :object => f
   %p= f.submit "Create"
 

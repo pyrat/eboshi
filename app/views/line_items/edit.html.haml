@@ -3,7 +3,7 @@
 
 = error_messages_for :line_item
 
-- form_for @line_item, :url => line_item_path(@client, @line_item) do |f|
+- form_for @line_item, :url => line_item_path(@line_item) do |f|
   = render :partial => 'form', :object => f, :as => :f
   %p= f.submit "Update"
 
