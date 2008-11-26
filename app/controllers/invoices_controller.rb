@@ -14,7 +14,7 @@ class InvoicesController < ApplicationController
 			format.html 
 			format.pdf do
 				send_data InvoiceDrawer.draw(@invoice),
-				  :filename => 'invoice.pdf',
+				  :filename => "bot-and-rose_invoice-#{@invoice.id}.pdf",
 				  :type => 'application/pdf',
 				  :disposition => 'inline'
 			end
