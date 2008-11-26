@@ -51,6 +51,8 @@ document.observe('dom:loaded', function() {
       else new Effect.BlindUp(el)
     }
   })
+  
+  ajax_mini_invoice_show_links()
 })
 
 function ajax_mini_invoice_show_links() {
