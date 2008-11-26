@@ -35,7 +35,7 @@
             %b.red UNPAID
             = button_to 'Mark as Paid', paid_invoice_path(invoice)
         %td{ :colspan => 2 }
-          = link_to 'Export PDF', invoice_path(invoice, :format => :pdf)
+          = link_to 'Export PDF', invoice_path(:id => invoice.id, :format => :pdf)
           = link_to 'Edit', edit_invoice_path(invoice)
           = link_to 'Delete', invoice_path(invoice), :method => :delete, :confirm => 'Are you certain you want to delete this invoice and its hours and notes?'
 

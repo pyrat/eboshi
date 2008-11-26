@@ -5,8 +5,8 @@ class Invoice < ActiveRecord::Base
 	has_many :works
 	has_many :adjustments
 	
-	named_scope :unpaid, :conditions => "paid = '0000-00-00 00:00:00' OR paid IS NULL"
-	named_scope :paid, :conditions => "paid > 0"
+	named_scope :unpaid, :conditions => "paid = '0000-00-00 00:00:00' OR paid IS NULL", :order => "`date` DESC"
+	named_scope :paid, :conditions => "paid > 0", :order => "`date` DESC"
 	
 	validates_presence_of :client, :date, :project_name
 
@@ -36,8 +36,5 @@ class Invoice < ActiveRecord::Base
     return 'unbilled' if new_record?
     return paid ? 'paid' : 'unpaid'
   end
-  
-  def number
-    client.invoices.count(:conditions => ['date < ?', date]) + 1
-  end
+
 end
