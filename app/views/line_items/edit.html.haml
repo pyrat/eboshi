@@ -1,4 +1,10 @@
 - content_for :title do
   Editing line_item
 
-= render :partial => 'form'
+= error_messages_for :line_item
+
+- form_for @line_item, :url => line_item_path(@client, @line_item) do |f|
+  = render :partial => 'form', :object => f, :as => :f
+  %p= f.submit "Update"
+
+= link_to 'Back', line_items_path(@client)
